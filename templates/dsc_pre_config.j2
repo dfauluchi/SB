@@ -1,0 +1,50 @@
+{#
+SB DSC Migration Template v0.1
+Format: Jinja2 + YAML
+Author: D. Fauluchi
+Configuration Source: Cisco_Pre-Post_Checks_V0.1
+#}
+!
+{#- DSC L2 SVI configurations #}
+! {{ config[device.name].hostname.upper() }} VLAN configurations !
+!
+{%- for each_vlan in config[device.name].vlan_list %}
+vlan {{ each_vlan.vlan}}
+  name {{ each_vlan.name}}
+exit
+!
+{%- endfor %}
+! #Allow VLANs towards DRC
+!
+interface Port-channel {{ config[device.name].drc_po_id }}
+ switchport trunk allowed vlan add {{ config[device.name].vlan_set }}
+!
+! #Config towards SB
+!
+{%- for each_sb_interface in config[device.name].phy_interface_list %}
+interface {{ each_sb_interface.interface }}
+  description {{ each_sb_interface.description }}
+  switchport
+  mtu {{ each_sb_interface.mtu }}
+  channel-group {{ config[device.name].sb_po_id }} mode active
+  shutdown
+!
+{%- endfor %}
+interface port-channel{{ config[device.name].sb_po_id }}
+  description {{ config[device.name].sb_po_description }}
+  switchport
+  switchport mode trunk
+  switchport trunk allowed vlan {{ config[device.name].vlan_set }}
+  mtu {{ config[device.name].sb_po_mtu }}
+  priority-flow-control mode on
+  spanning-tree port type edge trunk
+  {%- if (config[device.name].model=='N3K-C3232C') or  (config[device.name].model=='N3K-C3264C-E') or  (config[device.name].model=='N7K-C7010') or  (config[device.name].model=='N77K-C7710') %}
+  storm-control broadcast level 1.0
+  storm-control multicast level 1.0
+  storm-control action trap
+  {%- endif %}
+  shutdown
+!
+end
+!
+copy run start

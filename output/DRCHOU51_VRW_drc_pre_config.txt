@@ -1,0 +1,172 @@
+
+!
+! DRCHOU51 L3 Interface configurations !
+!
+interface Bundle-Ether651.109
+ description 0163.07_VRWHOU01_Po1.2_NMNET
+ encapsulation dot1q 109
+ mtu 9216
+ vrf NMNET
+ ipv4 address 10.240.137.104/31
+ no ip redirect
+ load-interval 30
+ shutdown
+!
+interface Bundle-Ether651.223
+ description 0163.07_VRWHOU01_Po1.3_IPv4_Default
+ encapsulation dot1q 223
+ mtu 9216
+ ipv4 address 10.177.115.226/31
+ no ip redirect
+ load-interval 30
+ shutdown
+!
+interface Bundle-Ether651.310
+ description 0163.07_VRWHOU01_Po1.4_METROE_E
+ encapsulation dot1q 310
+ mtu 9216
+ vrf METROE-E
+ ipv4 address 10.177.115.228/31
+ no ip redirect
+ load-interval 30
+ shutdown
+!
+interface Bundle-Ether651.415
+ description 0163.07_VRWHOU01_Po1.5_IPv4_GI
+ encapsulation dot1q 415
+ mtu 9216
+ vrf GI
+ ipv4 address 10.177.115.230/31
+ no ip redirect
+ load-interval 30
+ shutdown
+!
+interface Bundle-Ether651.416
+ description 0163.07_VRWHOU01_Po1.7_ IPv6-GI
+ encapsulation dot1q 416
+ mtu 9216
+ vrf GI
+ ipv6 address fd00:976a:c307:2859:97c8:77a3:0:a/127
+ no ipv6 nd redirect
+ load-interval 30
+ shutdown
+!
+interface Bundle-Ether651.1215
+ description 0163.07_VRWHOU01_Po1.8_IPV6SUB
+ encapsulation dot1q 1215
+ mtu 9216
+ vrf IPV6SUB
+ ipv6 address fd00:976a:c307:2859:97c8:77a4:0:a/127
+ no ipv6 nd redirect
+ load-interval 30
+ shutdown
+!
+! DRCHOU51 BGP Neighbor configurations !
+!
+router bgp 65137
+  neighbor 10.166.112.83
+   description VRCNLV01_IPv4_Global
+   shutdown
+   use neighbor-group SB-IPV4-GROUP
+   bfd fast-detect 
+   bfd multiplier 3 
+   bfd minimum-interval 250
+   maximum-prefix 2000 75 restart 5
+   send-community-ebgp
+   address-family ipv4 unicast 
+    default-originate
+  exit
+ !
+ vrf METROE-E
+  neighbor 10.166.112.87
+   description VRCPTL01_VRF_METROE-E
+   remote as 65138
+   shutdown
+   use neighbor-group SB-IPV4-GROUP
+   bfd fast-detect 
+   bfd multiplier 3 
+   bfd minimum-interval 250
+   maximum-prefix 2000 75 restart 5
+   send-community-ebgp
+   address-family ipv4 unicast 
+    default-originate
+    route-policy RP_METROE-E_OUT out
+  exit
+ exit
+ !
+ vrf GI
+  neighbor 10.166.112.91
+   description VRCNLV01_vrf_Gi
+   password encrypted 3ncr1p73d
+   shutdown
+   use neighbor-group SB-IPV4-GROUP
+   bfd fast-detect 
+   bfd multiplier 3 
+   bfd minimum-interval 250
+   maximum-prefix 2000 75 restart 5
+   send-community-ebgp
+   address-family ipv4 unicast 
+    default-originate
+  exit
+ exit
+ !
+ vrf GI
+  neighbor fd00:976a:14f3:193f::5:b
+   description VRCNLV01_vrf_GI-V6
+   shutdown
+   use neighbor-group SB-IPV6-GROUP
+   bfd fast-detect 
+   bfd multiplier 3 
+   bfd minimum-interval 250
+   maximum-prefix 2000 75 restart 5
+   send-community-ebgp
+   address-family ipv6 unicast 
+    default-originate
+    route-policy RP_DEFAULT_IN in
+    route-policy RP_DEFAULT_OUT out
+  exit
+ exit
+ !
+ vrf IPV6SUB
+  neighbor fd00:976a:14f3:193f::2:b
+   description VRCNLV01_vrf_IPV6SUB
+   shutdown
+   use neighbor-group SB-IPV6-GROUP
+   bfd fast-detect 
+   bfd multiplier 3 
+   bfd minimum-interval 250
+   maximum-prefix 2000 75 restart 5
+   send-community-ebgp
+   address-family ipv6 unicast 
+    default-originate
+  exit
+ exit
+ !
+ vrf NMNET
+  neighbor 10.249.32.207
+   description VRCNLV01_vrf_NMNET
+   shutdown
+   bfd fast-detect 
+   bfd multiplier 3 
+   bfd minimum-interval 250
+   maximum-prefix 2000 75 restart 5
+   send-community-ebgp
+   address-family ipv4 unicast 
+    default-originate
+    route-policy RP_NMNET_IN in
+  exit
+ exit
+ !
+commit label CR11223344_6_Preconfig
+
+router static
+ address-family ipv4 unicast
+  10.164.161.252/30 Bundle-Ether651.206 10.164.161.254 bfd fast-detect minimum-interval 250 multiplier 3
+ !
+ vrf default
+ address-family ipv6 unicast
+  fd00:976a:b69a:a1c1:186f:41f6:0:a/127 Bundle-Ether651.1202 fd00:976a:b69a:a1c1:186f:41f6:0:b bfd fast-detect minimum-interval 250 multiplier 3
+ !
+!
+commit label CR11223344
+end

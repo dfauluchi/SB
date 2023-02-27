@@ -1,0 +1,22 @@
+{#
+SB Migration Template v0.1
+Format: Jinja2 + YAML
+Author: D. Fauluchi
+Configuration Source: Cisco_Pre-Post_Checks_V0.1
+#}
+!
+{#- Check SB BGP Lo0 Adv #}
+{%- if config[device.name].side=='even' %}
+{%- set pair = config[device.name].role + '_odd' %}
+{%- else %}
+{%- set pair = config[device.name].role + '_even' %}
+{%- endif %}
+! {{ config[device.name].hostname.upper() }}
+!
+config t
+!
+ip prefix-list {{ config[device.name].lo0_prefix_name }} seq {{ config[device.name].lo0_prefix_id }} permit {{ config[pair].lo0 + '/32'}}
+!
+end
+!
+copy run start

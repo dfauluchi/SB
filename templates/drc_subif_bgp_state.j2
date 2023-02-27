@@ -1,0 +1,40 @@
+{#
+SB DRC Migration Template v0.1
+Format: Jinja2 + YAML
+Author: D. Fauluchi
+Configuration Source: Cisco_Pre-Post_Checks_V0.1
+#}
+{#- DRC subif state #}
+{{ config[device.name].hostname.upper() }} 
+!
+show Bundle brief 
+show bundle bundle-ether {{ config[device.name].be_id }} 
+{%- for each_bundle_subinterface in config[device.name].bundle_subinterface_list %}
+Show int BE{{ config[device.name].be_id }}.{{ each_bundle_subinterface.dot1q }} | inc rate 
+{%- endfor %}
+!!!***Check BE{{ config[device.name].be_id }} Traffic rate on both DRCs !!! 
+! 
+show bfd all session  
+
+{%- for each_bundle_subinterface in config[device.name].bundle_subinterface_list %}
+show bfd all session | inc BE{{ config[device.name].be_id }}.{{ each_bundle_subinterface.dot1q }}
+{%- endfor %}
+!
+show bgp sessions not-established 
+!
+{%- for each_bgp_neighbor in config[device.name].bgp_neighbor_list %}
+{%- if 'vrf' in each_bgp_neighbor %}
+show bgp vrf {{ each_bgp_neighbor.vrf }} summary  {%- if (each_bgp_neighbor['af']=='ipv6') %} wide {%- endif %} | inc {{ each_bgp_neighbor.neighbor }}
+show bgp vrf {{ each_bgp_neighbor.vrf }} {{ each_bgp_neighbor.af }} unicast neighbors {{ each_bgp_neighbor.neighbor }} advertised-count 
+show bgp vrf {{ each_bgp_neighbor.vrf }} {{ each_bgp_neighbor.af }} unicast neighbors {{ each_bgp_neighbor.neighbor }} advertised-routes 
+show bgp vrf {{ each_bgp_neighbor.vrf }} {{ each_bgp_neighbor.af }} unicast neighbors {{ each_bgp_neighbor.neighbor }} routes 
+{%- else %}
+show bgp all all summary {%- if (each_bgp_neighbor['af']=='ipv6') %} wide {%- endif %} | inc {{ each_bgp_neighbor.neighbor }} 
+show bgp all all neighbors {{ each_bgp_neighbor.neighbor }} advertised-count 
+show bgp all all neighbors {{ each_bgp_neighbor.neighbor }} advertised-routes 
+show bgp all all neighbors {{ each_bgp_neighbor.neighbor }} routes 
+{%-endif %}
+!
+{%- endfor %}
+!!!***Check all BGP Neighbor summary and if routes are not too much take the route-table output***!!!      
+ 

@@ -1,0 +1,15 @@
+
+VRBHOU02 
+!
+
+show run interface port-channel1
+
+config t
+!
+interface port-channel1
+ no lacp min-links 2
+!
+end
+!
+copy run start
+!

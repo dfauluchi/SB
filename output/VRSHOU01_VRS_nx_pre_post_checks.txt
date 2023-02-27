@@ -1,0 +1,49 @@
+
+!
+! VRSHOU01 Checks
+!
+term length 0
+show version
+show module 
+show system uptime 
+show system mode 
+show boot
+!
+show diagnostic events
+show inventory
+show file bootflash:
+show file debug:
+show process cpu
+show process cpu | i CPU
+show process memory
+show environment
+!
+show run
+show interface brief
+show interface status
+show interface description
+show ip int brief vrf all
+show ipv6 int brief vrf all
+show vlan brief
+show vrf all interface
+show spanning-tree
+show interface
+!
+show port-channel summary
+show port-channel database
+!
+show bgp vrf all sessions
+show bgp all summary 
+show ip route summary
+show ipv6 route summary  
+show ip route vrf management
+!
+show hsrp brief
+show hsrp summary
+!
+Show bfd neighbors vrf all
+Show bfd ipv6 neighbors vrf all
+Show bgp all summary vrf all
+!
+show logg
+!

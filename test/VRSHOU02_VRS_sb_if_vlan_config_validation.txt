@@ -1,0 +1,11 @@
+
+VRSHOU02 
+!
+!
+show interface status
+show interface description | inc 1/53
+show interface Eth1/53 transceiver details
+!!!***Check both new interfaces are in Auto_Cable_Testing mode and up/up ***!!!
+!
+show vlan brief
+!!! Vlans 109 216 305 411 412 1209 should not be existing !!!

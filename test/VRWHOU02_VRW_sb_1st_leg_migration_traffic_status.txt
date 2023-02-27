@@ -1,0 +1,18 @@
+
+!
+! VRWHOU02 
+
+show port-channel summary
+show int port-channel 111 | inc rate
+show int port-channel 1 | inc rate
+!!!*** Check port-channel 111 member ports are up and traffic on port-channel 111***!!!
+
+Show bgp vrf all all summary
+!!!***BGP with AS65138 should be UP on Cross-link po111***!!!
+!!!***All BGP with AS65137 should be UP on VRWHOU02 uplinks***!!!
+!
+sh ip route 0.0.0.0 vrf all
+sh ip bgp 0.0.0.0 vrf all
+!
+sh ipv6 route 0::/0 vrf all
+sh ipv6 bgp 0::/0 vrf all

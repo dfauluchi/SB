@@ -1,0 +1,63 @@
+
+!
+! VRBHOU01
+!
+###### LOGS Before HSRP switch #####
+show run hsrp
+show run track
+!!!!SAMPLE OUTPUT !!!
+track 1 interface port-channel1 line-protocol
+track 101 interface loopback101 line-protocol
+
+show track
+show hsrp brief
+# show hsrp brief
+*:IPv6 group   #:group belongs to a bundle
+                     P indicates configured to preempt.
+                     |
+ Interface   Grp  Prio P State    Active addr      Standby addr     Group 
+addr
+  Vlan200     200  100  P Standby  10.250.97.163    local            10.250.97.161   (conf)
+
+show int po1 | inc rate
+show int po111 | inc rate
+
+!!!*** Check the HSRP status and traffic rate on uplink/cross-link Port-channels ***!!! 
+
+show run int loopback 101
+!
+config t
+!
+interface Loopback101
+ description HSRP Control Interface Loopback101
+ shutdown
+!
+copy run start
+
+! VRBHOU02
+
+show run int loopback101
+!
+config t
+!
+interface loopback 101
+  description HSRP Control Interface Loopback101
+  no shutdown
+!
+copy run start
+
+! VRBHOU01
+!!!Validate HSRP Switchover!!!
+show track
+show hsrp brief 
+!!!All HSRP GROUP should be in standby now!!!
+show int po1 | inc rate
+show int po111 | inc rate
+!!!***Po1 Traffic on VRBHOU01 should be decreased gradually and all traffic to pass via Po111 to VRBHOU02***!!!
+
+! VRBHOU02
+show hsrp brief 
+!!!All HSRP should be Active on VRBHOU02!!!
+show int po1 | inc rate
+show int po111 | inc rate
+!!!***Po1 Traffic on VRBHOU02 should be increased gradually and all traffic to pass via VRBHOU02***!!!

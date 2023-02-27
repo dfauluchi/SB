@@ -1,0 +1,17 @@
+
+!
+! DSCHOU11 Interface no shut !
+!
+!!!! Config towards SB !!!!
+!
+config t
+!
+interface port-channel 616
+ no shutdown
+!
+interface Eth6/3
+ no shutdown
+!
+end
+!
+copy run start

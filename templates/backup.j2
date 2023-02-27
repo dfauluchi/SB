@@ -1,0 +1,17 @@
+{#
+SB DRC Migration Template v0.1
+Format: Jinja2 + YAML
+Author: D. Fauluchi
+Configuration Source: Cisco_Pre-Post_Checks_V0.1
+#}
+!
+{#- Configuration Backup #}
+! {{ config[device.name].hostname.upper() }} Configuration Backup
+!
+dir {{ config[device.name].unit }}:
+
+Check if there is sufficient memory available on {{ config[device.name].unit }}:
+
+Config Backup:
+
+#copy running-config {{ config[device.name].unit }}:Backup_{{ config.cr }}_mmddyyyy

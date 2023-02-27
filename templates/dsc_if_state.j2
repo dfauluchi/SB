@@ -1,0 +1,23 @@
+{#
+SB DRC Migration Template v0.1
+Format: Jinja2 + YAML
+Author: D. Fauluchi
+Configuration Source: Cisco_Pre-Post_Checks_V0.1
+#}
+{#- DSC interface state #}
+{{ config[device.name].hostname.upper() }} 
+!
+show port-channel summary
+show int status | in VRBHOU
+
+!!!***Verify Port-channel {{ config[device.name].sb_po_id }} is up and all interfaces {%- for each_phy_if in config[device.name].phy_interface_list %} {{ each_phy_if.interface }} {%- endfor %} are up***!!!
+!!!***Verify Power level is OK for the interfaces***!!!
+{%- for each_phy_if in config[device.name].phy_interface_list %}
+show run int {{ each_phy_if.interface }}
+show int {{ each_phy_if.interface }} transceiver details
+show int {{ each_phy_if.interface }} | inc error
+{%- endfor %}
+Show run int po{{ config[device.name].sb_po_id }}
+Show run int po{{ config[device.name].drc_po_id }}
+show vlan brief
+!!! Vlans {%- for each_vlan in config[device.name].vlan_list %} {{ each_vlan.vlan}} {%- endfor %} should not be existing !!!

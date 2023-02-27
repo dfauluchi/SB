@@ -1,0 +1,34 @@
+{#
+SB DRC Migration Template v0.1
+Format: Jinja2 + YAML
+Author: D. Fauluchi
+Configuration Source: Cisco_Pre-Post_Checks_V0.1
+#}
+{#- SB interface and BGP state #}
+{{ config[device.name].hostname.upper() }} 
+!
+Show port-channel summary
+Show int po 111 | inc rate
+Show int po 1 | inc rate 
+!!!*** Check port-channel 111 (SB Cross-link) member ports are up and traffic on uplink port-channel 1***!!!
+!
+Show bfd vrf all neighbors 
+Show bfd vrf all ipv6 neighbors
+!
+show ip route 0.0.0.0 vrf all
+show ip bgp 0.0.0.0/0 vrf all
+!
+show ipv6 route ::/0 vrf all
+show ipv6 bgp ::/0 vrf all
+!
+Show vrf all
+!
+Show bgp vrf all all summary 
+Show bgp vrf all all summary | inc 65137 
+!
+{%- for each_bgp_neighbor in config[device.name].bgp_neighbor_list %}
+show bgp vrf all all neighbors {{ each_bgp_neighbor.neighbor }} advertised-routes
+show bgp vrf all all neighbors {{ each_bgp_neighbor.neighbor }} routes
+!
+{%- endfor %}
+

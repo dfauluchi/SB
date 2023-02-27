@@ -1,0 +1,47 @@
+{#
+SB DRC Migration Template v0.1
+Format: Jinja2 + YAML
+Author: D. Fauluchi
+Configuration Source: Cisco_Pre-Post_Checks_V0.1
+#}
+!
+{#- SB if no shut #}
+! {{ config[device.name].hostname.upper() }} Interface no shut !
+!
+!!!!!!!!! Unshut Interfaces !!!!!!!!!!!!
+config t
+!
+interface  port-channel{{ config[device.name].uplink_lacp.po_id }}
+ no shutdown
+!
+{%- for each_phy_interface in config[device.name].phy_interface_list %}
+interface {{each_phy_interface.type}}{{each_phy_interface.id}}
+ no shutdown
+!
+{%- endfor %}
+{%- for each_po_subinterface in config[device.name].po_subinterface_list %}
+interface Po{{ config[device.name].uplink_lacp.po_id }}.{{ each_po_subinterface.new_dot1q }}
+ no shutdown
+!
+{%- endfor %}
+Show port-channel summary
+!!!***Validate port-channel 1 comes up***!!!
+!!!!!!!!!!! BGP no shutdown to DRCHOU51 {{ config['drc_'+config[device.name].side].hostname.upper() }} !!!!!!!!!!!!!!!
+
+Config t
+router bgp {{ config[device.name].bgp_as }}
+{%- for each_bgp_neighbor in config[device.name].bgp_neighbor_list%}
+{%- if 'vrf' in each_bgp_neighbor %}
+ vrf {{ each_bgp_neighbor.vrf }}
+{%- endif %}
+  neighbor {{ each_bgp_neighbor.neighbor }}
+   no shutdown
+   exit
+{%- if 'vrf' in each_bgp_neighbor %}
+  exit
+{%- endif %}
+!
+{%- endfor %}
+!
+end
+copy run start

@@ -1,0 +1,39 @@
+{#
+SB DRC Migration Template v0.1
+Format: Jinja2 + YAML
+Author: D. Fauluchi
+Configuration Source: Cisco_Pre-Post_Checks_V0.1
+#}
+!
+{#- DRC5x L3 subif & BGP neighbors no shut #}
+! {{ config[device.name].hostname.upper() }} L3 Interface configurations !
+!
+
+show run formal | inc {{ config['sb_'+config[device.name].side].hostname.upper() }}
+
+config t
+!
+{%- for each_bundle_subinterface in config[device.name].bundle_subinterface_list %}
+interface Bundle-Ether{{ config[device.name].be_id }}.{{ each_bundle_subinterface.dot1q }}
+ no shutdown
+!
+{%- endfor %}
+!
+router bgp 65137
+{%- for each_neighbor in config[device.name].bgp_neighbor_list %}
+{%- if 'vrf' in each_neighbor %}
+ vrf {{ each_neighbor.vrf }}
+{%- endif %}
+  neighbor {{ each_neighbor.neighbor }} 
+   no shutdown
+   exit
+{%- if 'vrf' in each_neighbor %}
+  exit
+{%- endif %}
+  !
+{%- endfor %}
+root
+!
+show config
+!
+commit label {{ config.cr }}_731_Unshut

@@ -1,0 +1,37 @@
+
+VRWHOU01 
+!
+Show port-channel summary
+Show int po 111 | inc rate
+Show int po 1 | inc rate 
+!!!*** Check port-channel 111 (SB Cross-link) member ports are up and traffic on uplink port-channel 1***!!!
+!
+Show bfd vrf all neighbors 
+Show bfd vrf all ipv6 neighbors
+!
+show ip route 0.0.0.0 vrf all
+show ip bgp 0.0.0.0/0 vrf all
+!
+show ipv6 route ::/0 vrf all
+show ipv6 bgp ::/0 vrf all
+!
+Show vrf all
+!
+Show bgp vrf all all summary 
+Show bgp vrf all all summary | inc 65137 
+!
+show bgp vrf all all neighbors 10.177.115.164 advertised-routes
+show bgp vrf all all neighbors 10.177.115.164 routes
+!
+show bgp vrf all all neighbors 10.177.115.166 advertised-routes
+show bgp vrf all all neighbors 10.177.115.166 routes
+!
+show bgp vrf all all neighbors fd00:976a:c307:2859:97c8:7784:0:a advertised-routes
+show bgp vrf all all neighbors fd00:976a:c307:2859:97c8:7784:0:a routes
+!
+show bgp vrf all all neighbors 10.240.137.82 advertised-routes
+show bgp vrf all all neighbors 10.240.137.82 routes
+!
+show bgp vrf all all neighbors fd00:976a:c307:2859:97c8:7785:0:a advertised-routes
+show bgp vrf all all neighbors fd00:976a:c307:2859:97c8:7785:0:a routes
+!

@@ -1,0 +1,24 @@
+{#
+SB DRC Migration Template v0.1
+Format: Jinja2 + YAML
+Author: D. Fauluchi
+Configuration Source: Cisco_Pre-Post_Checks_V0.1
+#}
+{#- DSC1x Interfaces and VLANs config validation #}
+{{ config[device.name].hostname.upper() }} 
+!
+show run int {{ config[device.name].sb_po_id}}
+!!!***Po616 does not exist ***!!!
+!
+!!!***Check new interfaces are in Auto_Cable_Testing mode and up/up ***!!!
+show interface status | i {{ config['sb_'+config[device.name].side].hostname.upper() }}
+{%- for each_phy_if in config[device.name].phy_interface_list %}
+show interface description | inc {{each_phy_if.id}}
+show run int {{each_phy_if.type}}{{each_phy_if.id}}
+show interface {{each_phy_if.type}}{{each_phy_if.id}} transceiver details
+show int {{each_phy_if.type}}{{each_phy_if.id}} | inc error
+show vlan brief
+{%- endfor %}
+
+!!! Vlans {%- for each_vlan in config[device.name].vlan_list %} {{ each_vlan.vlan}} {%- endfor %} should not be existing !!!
+

@@ -1,0 +1,55 @@
+
+DRCHOU51 
+!
+show Bundle brief 
+show bundle bundle-ether 651
+Show int BE651.109 | inc rate
+Show int BE651.216 | inc rate
+Show int BE651.305 | inc rate
+Show int BE651.411 | inc rate
+Show int BE651.412 | inc rate
+Show int BE651.1209 | inc rate
+!!!***Check BE651 Traffic rate on both DRCs !!! 
+! 
+show bfd all session
+show bfd all session | inc BE651.109
+show bfd all session | inc BE651.216
+show bfd all session | inc BE651.305
+show bfd all session | inc BE651.411
+show bfd all session | inc BE651.412
+show bfd all session | inc BE651.1209
+!
+show bgp sessions not-established 
+!
+show bgp all all summary | inc 10.166.112.83 
+show bgp all all neighbors 10.166.112.83 advertised-count 
+show bgp all all neighbors 10.166.112.83 advertised-routes 
+show bgp all all neighbors 10.166.112.83 routes
+!
+show bgp vrf METROE-E summary | inc 10.166.112.87
+show bgp vrf METROE-E ipv4 unicast neighbors 10.166.112.87 advertised-count 
+show bgp vrf METROE-E ipv4 unicast neighbors 10.166.112.87 advertised-routes 
+show bgp vrf METROE-E ipv4 unicast neighbors 10.166.112.87 routes
+!
+show bgp vrf GI summary | inc 10.166.112.91
+show bgp vrf GI ipv4 unicast neighbors 10.166.112.91 advertised-count 
+show bgp vrf GI ipv4 unicast neighbors 10.166.112.91 advertised-routes 
+show bgp vrf GI ipv4 unicast neighbors 10.166.112.91 routes
+!
+show bgp vrf GI summary wide | inc fd00:976a:14f3:193f::5:b
+show bgp vrf GI ipv6 unicast neighbors fd00:976a:14f3:193f::5:b advertised-count 
+show bgp vrf GI ipv6 unicast neighbors fd00:976a:14f3:193f::5:b advertised-routes 
+show bgp vrf GI ipv6 unicast neighbors fd00:976a:14f3:193f::5:b routes
+!
+show bgp vrf IPV6SUB summary wide | inc fd00:976a:14f3:193f::2:b
+show bgp vrf IPV6SUB ipv6 unicast neighbors fd00:976a:14f3:193f::2:b advertised-count 
+show bgp vrf IPV6SUB ipv6 unicast neighbors fd00:976a:14f3:193f::2:b advertised-routes 
+show bgp vrf IPV6SUB ipv6 unicast neighbors fd00:976a:14f3:193f::2:b routes
+!
+show bgp vrf NMNET summary | inc 10.249.32.207
+show bgp vrf NMNET ipv4 unicast neighbors 10.249.32.207 advertised-count 
+show bgp vrf NMNET ipv4 unicast neighbors 10.249.32.207 advertised-routes 
+show bgp vrf NMNET ipv4 unicast neighbors 10.249.32.207 routes
+!
+!!!***Check all BGP Neighbor summary and if routes are not too much take the route-table output***!!!      
+ 

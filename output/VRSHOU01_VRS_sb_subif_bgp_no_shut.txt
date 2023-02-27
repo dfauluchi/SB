@@ -1,0 +1,68 @@
+
+!
+! VRSHOU01 Interface no shut !
+!
+!!!!!!!!! Unshut Interfaces !!!!!!!!!!!!
+config t
+!
+interface  port-channel1
+ no shutdown
+!
+interface Eth1/54
+ no shutdown
+!
+interface Po1.109
+ no shutdown
+!
+interface Po1.216
+ no shutdown
+!
+interface Po1.305
+ no shutdown
+!
+interface Po1.411
+ no shutdown
+!
+interface Po1.412
+ no shutdown
+!
+interface Po1.1209
+ no shutdown
+!
+Show port-channel summary
+!!!***Validate port-channel 1 comes up***!!!
+!!!!!!!!!!! BGP no shutdown to DRCHOU51 DRCHOU51 !!!!!!!!!!!!!!!
+
+Config t
+router bgp 65138
+  neighbor 10.177.115.164
+   no shutdown
+   exit
+!
+ vrf GI
+  neighbor 10.177.115.166
+   no shutdown
+   exit
+  exit
+!
+ vrf GI
+  neighbor fd00:976a:c307:2859:97c8:7784:0:a
+   no shutdown
+   exit
+  exit
+!
+ vrf NMNET
+  neighbor 10.240.137.82
+   no shutdown
+   exit
+  exit
+!
+ vrf IPV6SUB
+  neighbor fd00:976a:c307:2859:97c8:7785:0:a
+   no shutdown
+   exit
+  exit
+!
+!
+end
+copy run start

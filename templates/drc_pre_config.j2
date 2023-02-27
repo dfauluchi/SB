@@ -1,0 +1,88 @@
+{#
+SB DRC Migration Template v0.1
+Format: Jinja2 + YAML
+Author: D. Fauluchi
+Configuration Source: Cisco_Pre-Post_Checks_V0.1
+#}
+!
+{#- DRC L3 subif configurations #}
+! {{ config[device.name].hostname.upper() }} L3 Interface configurations !
+!
+{%- for each_bundle_subinterface in config[device.name].bundle_subinterface_list %}
+interface Bundle-Ether{{ config[device.name].be_id }}.{{ each_bundle_subinterface.dot1q }}
+ description {{ each_bundle_subinterface.description }}
+ encapsulation dot1q {{ each_bundle_subinterface.dot1q }}
+ mtu 9216
+{%- if 'vrf' in each_bundle_subinterface %}
+ vrf {{ each_bundle_subinterface.vrf }}
+{%- endif %}
+{%- if 'ipv4_address' in each_bundle_subinterface %}
+ ipv4 address {{ each_bundle_subinterface.ipv4_address }}
+ no ip redirect
+{%- endif %}
+{%- if 'ipv6_address' in each_bundle_subinterface %}
+ ipv6 address {{ each_bundle_subinterface.ipv6_address }}
+ no ipv6 nd redirect
+{%- endif %}
+ load-interval 30
+ shutdown
+!
+{%- endfor %}
+{#- DRC bgp neighbor configurations #}
+! {{ config[device.name].hostname.upper() }} BGP Neighbor configurations !
+!
+router bgp {{ config[device.name].bgp_as }}
+{%- for each_neighbor in config[device.name].bgp_neighbor_list %}
+{%- if 'vrf' in each_neighbor %}
+ vrf {{ each_neighbor.vrf }}
+{%- endif %}
+  neighbor {{ each_neighbor.neighbor }} 
+{%- if 'description' in each_neighbor %}
+   description {{ each_neighbor.description }}
+{%- endif %}
+{%- if 'password' in each_neighbor %}
+   password encrypted {{ each_neighbor.password }}
+{%- endif %}
+{%- if 'remote_as' in each_neighbor %}
+   remote as {{ each_neighbor.remote_as }}
+{%- endif %}
+   shutdown 
+{%- if 'neighbor_group' in each_neighbor %}
+   use neighbor-group {{ each_neighbor.neighbor_group }}
+{%- endif %}
+   bfd fast-detect 
+   bfd multiplier 3 
+   bfd minimum-interval 250
+   maximum-prefix 2000 75 restart 5
+   send-community-ebgp
+   address-family {{ each_neighbor.af }} unicast 
+    default-originate
+{%- if 'route_policy_in' in each_neighbor %}
+    route-policy {{ each_neighbor.route_policy_in }} in
+{%- endif %}
+{%- if 'route_policy_out' in each_neighbor %}
+    route-policy {{ each_neighbor.route_policy_out }} out
+{%- endif %}
+  exit
+{%- if 'vrf' in each_neighbor %}
+ exit
+{%- endif %}
+ !
+{%- endfor %}
+commit label {{ config.cr }}_6_Preconfig
+
+{%- if 'static_route_list' in config[device.name] %}
+
+router static
+{%- for each_static_route in config[device.name].static_route_list %}
+{%- if 'vrf' in each_static_route %}
+ vrf {{ each_static_route.vrf }}
+{%- endif %}
+ address-family {{ each_static_route.af }} unicast
+  {{ each_static_route.route }} {{ each_static_route.interface }} {{ each_static_route.next_hop }} bfd fast-detect minimum-interval 250 multiplier 3
+ !
+{%- endfor %}
+!
+commit label {{ config.cr }}
+end
+{%- endif %}

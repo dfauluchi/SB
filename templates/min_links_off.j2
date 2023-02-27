@@ -1,0 +1,48 @@
+{#
+SB DRC Migration Template v0.1
+Format: Jinja2 + YAML
+Author: D. Fauluchi
+Configuration Source: Cisco_Pre-Post_Checks_V0.1
+#}
+{#- Remove min-links #}
+{{ config[device.name].hostname.upper() }} 
+!
+
+
+{%- if config[device.name].role=='drc' %}
+{%- if ('be_min_links' in config[device.name]) and (config[device.name].be_min_links > 0) %}
+
+show run interface Bundle-Ether{{ config[device.name].be_id}}
+
+config t
+interface Bundle-Ether{{ config[device.name].be_id}}
+ no bundle minimum-active links {{ config[device.name].be_min_links}}
+!
+root
+!
+show config
+!
+commit {{ config.cr }}_6.5_Minlink
+{%- else %}
+!!! No Min-Links config applied 
+{%- endif %}
+{%- endif %}
+
+{%- if config[device.name].role=='sb' %}
+{%- if ('po_min_links' in config[device.name].uplink_lacp) and (config[device.name].uplink_lacp.po_min_links > 0) %}
+
+show run interface port-channel{{ config[device.name].uplink_lacp.po_id}}
+
+config t
+!
+interface port-channel{{ config[device.name].uplink_lacp.po_id}}
+ no lacp min-links {{ config[device.name].uplink_lacp.po_min_links }}
+!
+end
+!
+copy run start
+!
+{%- else %}
+!!! No Min-Links config applied 
+
+{%- endif %}{%- endif %}

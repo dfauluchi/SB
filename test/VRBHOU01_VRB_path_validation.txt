@@ -1,0 +1,17 @@
+
+!
+!! Below VRBHOU01/VRBHOU02 Lo0 ping and traceroute will be captured at every path change section
+
+DRCNRT51 to VRBHOU01 Lo0:
+ping 10.169.11.19
+traceroute 10.169.11.19
+!
+DRCNRT51 to VRBHOU02 Lo0:
+ping 10.169.11.20
+traceroute 10.169.11.20
+
+
+VRBHOU01/VRBHOU02 to DRCNRT51 Lo0:
+Ping 10.169.14.148
+Traceroute 10.169.14.148
+!

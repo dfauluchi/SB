@@ -1,0 +1,13 @@
+
+VRBHOU01 
+!
+!
+show interface status
+show interface description | inc 1/54
+show interface Eth1/54 transceiver details
+show interface description | inc Inventada
+show interface EthInventada transceiver details
+!!!***Check both new interfaces are in Auto_Cable_Testing mode and up/up ***!!!
+!
+show vlan brief
+!!! Vlans 106 213 407 408 1206 should not be existing !!!

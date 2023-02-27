@@ -1,0 +1,11 @@
+
+VRWHOU01 
+!
+!
+show interface status
+show interface description | inc 1/49
+show interface Eth1/49 transceiver details
+!!!***Check both new interfaces are in Auto_Cable_Testing mode and up/up ***!!!
+!
+show vlan brief
+!!! Vlans 109 223 310 415 416 1215 should not be existing !!!

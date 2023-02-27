@@ -1,0 +1,27 @@
+{#
+SB DRC Migration Template v0.1
+Format: Jinja2 + YAML
+Author: D. Fauluchi
+Configuration Source: Cisco_Pre-Post_Checks_V0.1
+#}
+!
+{%- if config[device.name].side=='even' %}
+{%- set pair = config[device.name].role + '_odd' %}
+{%- else %}
+{%- set pair = config[device.name].role + '_even' %}
+{%- endif %}
+!! Below {{ config[device.name].hostname.upper() }}/{{ config[pair].hostname.upper() }} Lo0 ping and traceroute will be captured at every path change section
+
+DRCNRT51 to {{ config[device.name].hostname.upper() }} Lo0:
+ping {{ config[device.name].lo0 }}
+traceroute {{ config[device.name].lo0 }}
+!
+DRCNRT51 to {{ config[pair].hostname.upper() }} Lo0:
+ping {{ config[pair].lo0 }}
+traceroute {{ config[pair].lo0 }}
+
+
+{{ config[device.name].hostname.upper() }}/{{ config[pair].hostname.upper() }} to DRCNRT51 Lo0:
+Ping 10.169.14.148
+Traceroute 10.169.14.148
+!

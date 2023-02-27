@@ -1,0 +1,16 @@
+{#
+SB DRC Migration Template v0.1
+Format: Jinja2 + YAML
+Author: D. Fauluchi
+Configuration Source: Cisco_Pre-Post_Checks_V0.1
+#}
+{#- DRC5x Interfaces and VLANs config validation #}
+{{ config[device.name].hostname.upper() }} 
+!
+
+{%- for each_bundle_subinterface in config[device.name].bundle_subinterface_list %}
+show run interface {{ each_bundle_subinterface.bundle_subinterface }}
+{%- endfor %}
+
+!!!***Above sub-interfaces must not be existing***!!!
+

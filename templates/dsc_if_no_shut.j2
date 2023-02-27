@@ -1,0 +1,25 @@
+{#
+SB DRC Migration Template v0.1
+Format: Jinja2 + YAML
+Author: D. Fauluchi
+Configuration Source: Cisco_Pre-Post_Checks_V0.1
+#}
+!
+{#- DSC1x if no shut #}
+! {{ config[device.name].hostname.upper() }} Interface no shut !
+!
+!!!! Config towards SB !!!!
+!
+config t
+!
+interface port-channel {{ config[device.name].sb_po_id }}
+ no shutdown
+!
+{%- for each_phy_interface in config[device.name].phy_interface_list %}
+interface {{ each_phy_interface.type }}{{ each_phy_interface.id }}
+ no shutdown
+!
+{%- endfor %}
+end
+!
+copy run start

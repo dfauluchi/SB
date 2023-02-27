@@ -1,0 +1,89 @@
+
+!
+! VRSHOU01
+!
+show run formal | inc DRCHOU21
+!
+!!!***Validate neighbors to DRCHOU21 (AS65137), will be already down***!!!
+Show bgp all vrf all ipv4 unicast summary
+Show bgp all vrf all ipv4 unicast summary | inc 65137
+Show bgp all vrf all ipv6 unicast summary | inc 65137
+
+!!!!!!!!! BGP shutdown to DRCHOU21 !!!!!!!!!
+config t
+!
+router bgp 65137
+  neighbor 10.177.115.164
+   shutdown
+   exit
+!
+ vrf GI
+  neighbor 10.177.115.166
+   shutdown
+   exit
+  exit
+!
+ vrf GI
+  neighbor fd00:976a:c307:2859:97c8:7784:0:a
+   shutdown
+   exit
+  exit
+!
+ vrf NMNET
+  neighbor 10.240.137.82
+   shutdown
+   exit
+  exit
+!
+ vrf IPV6SUB
+  neighbor fd00:976a:c307:2859:97c8:7785:0:a
+   shutdown
+   exit
+  exit
+!
+!
+end
+!
+!!! Validate ping sweep and Application before moving further !!! 
+config t
+!!!!!!!!!Sub-interface shutdown !!!!!!!!!!
+show ip int brief vrf all | inc Po1
+show ipv6 int brief vrf all | inc Po1
+!!!***Validate sub-interfaces Po1.234578 status***!!!
+show run int po1.2
+show run int po1.3
+show run int po1.4
+show run int po1.5
+show run int po1.7
+show run int po1.8
+!
+interface Po1.2
+ shutdown
+!
+interface Po1.3
+ shutdown
+!
+interface Po1.4
+ shutdown
+!
+interface Po1.5
+ shutdown
+!
+interface Po1.7
+ shutdown
+!
+interface Po1.8
+ shutdown
+!
+!
+interface Po1
+ shutdown
+!
+do show bundle Po1
+!!!***Validate interfaces before shutdown***!!!
+interface Eth1/54
+ shutdown
+!
+!
+end
+copy run start

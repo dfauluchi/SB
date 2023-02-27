@@ -1,0 +1,68 @@
+
+!
+! DRCHOU51 L3 Interface configurations !
+!
+
+show run formal | inc VRWHOU01
+
+config t
+!
+interface Bundle-Ether651.109
+ no shutdown
+!
+interface Bundle-Ether651.223
+ no shutdown
+!
+interface Bundle-Ether651.310
+ no shutdown
+!
+interface Bundle-Ether651.415
+ no shutdown
+!
+interface Bundle-Ether651.416
+ no shutdown
+!
+interface Bundle-Ether651.1215
+ no shutdown
+!
+!
+router bgp 65137
+  neighbor 10.166.112.83 
+   no shutdown
+   exit
+  !
+ vrf METROE-E
+  neighbor 10.166.112.87 
+   no shutdown
+   exit
+  exit
+  !
+ vrf GI
+  neighbor 10.166.112.91 
+   no shutdown
+   exit
+  exit
+  !
+ vrf GI
+  neighbor fd00:976a:14f3:193f::5:b 
+   no shutdown
+   exit
+  exit
+  !
+ vrf IPV6SUB
+  neighbor fd00:976a:14f3:193f::2:b 
+   no shutdown
+   exit
+  exit
+  !
+ vrf NMNET
+  neighbor 10.249.32.207 
+   no shutdown
+   exit
+  exit
+  !
+root
+!
+show config
+!
+commit label CR11223344_731_Unshut

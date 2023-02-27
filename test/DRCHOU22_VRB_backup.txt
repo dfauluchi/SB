@@ -1,0 +1,11 @@
+
+!
+! DRCHOU22 Configuration Backup
+!
+dir disk0:
+
+Check if there is sufficient memory available on disk0:
+
+Config Backup:
+
+#copy running-config disk0:Backup_CR44556677_mmddyyyy

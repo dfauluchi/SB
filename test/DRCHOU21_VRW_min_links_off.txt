@@ -1,0 +1,15 @@
+
+DRCHOU21 
+!
+
+show run interface Bundle-Ether268
+
+config t
+interface Bundle-Ether268
+ no bundle minimum-active links 2
+!
+root
+!
+show config
+!
+commit CR11223344_6.5_Minlink

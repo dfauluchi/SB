@@ -1,0 +1,54 @@
+{#
+SB Migration Template v0.1
+Format: Jinja2 + YAML
+Author: D. Fauluchi
+Configuration Source: Cisco_Pre-Post_Checks_V0.1
+#}
+!
+{#- Check SB HSRP #}
+! {{ config[device.name].hostname.upper() }}
+!
+###### LOGS Before HSRP switch #####
+show hsrp brief
+Show run track
+!!!Sample Output!!!
+!!!track 1 interface port-channel1 line-protocol
+!!!track 101 interface port-channel101 line-protocol
+!
+config t
+Interface Lo101
+ no shut
+end
+!
+copy run start
+!
+show hsrp brief 
+!!!*** Verify HSRP is normalized and can see some Active for groups on {{ config[device.name].hostname.upper() }} ***!!!
+
+show int po{{ config[device.name].uplink_lacp.po_id }} | inc rate
+show int po111 | inc rate
+!!!*** Verify active traffic on {{ config[device.name].hostname.upper() }} Po{{ config[device.name].uplink_lacp.po_id }} ***!!!
+
+{%- if config[device.name].side=='even' %}
+{%- set pair = config[device.name].role + '_odd' %}
+{%- else %}
+{%- set pair = config[device.name].role + '_even' %}
+{%- endif %}
+
+{{ config[pair].hostname.upper() }}:
+config t
+!
+interface Lo101
+ shutdown
+!
+end
+copy run start
+!
+show hsrp brief
+show int po{{ config[pair].uplink_lacp.po_id }} | inc rate
+show int po111 | inc rate
+!!!*** Verify no active traffic on {{ config[pair].hostname.upper() }} Po{{ config[pair].uplink_lacp.po_id }} ***!!!
+
+{{ config[device.name].hostname.upper() }}:
+Show hsrp brief 
+!!!*** Verify HSRP is normalized and can see Active for all groups on {{ config[device.name].hostname.upper() }} ***!!!

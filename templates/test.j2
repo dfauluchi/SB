@@ -1,0 +1,42 @@
+! {{ config[device.name].hostname.upper() }} VLAN configurations !
+!
+{%- for each_vlan in config[device.name].vlan_list %}
+vlan {{ each_vlan.vlan}}
+  name {{ each_vlan.name}}
+exit
+!
+{%- endfor %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+DEVICE: {{device.name}}
+ROLE: {{ config[device.name].role }}
+SIDE: {{ config[device.name].side }}
+HOSTNAME: {{ config[device.name].hostname }}
+{%- if config[device.name].side=='even' %}
+{%- set pair = config[device.name].role + '_odd' %}
+{%- else %}
+{%- set pair = config[device.name].role + '_even' %}
+{%- endif %}
+
+PAR: {{ pair }}
+
+{{ config['sb_'+config[device.name].side] }}
+{{ 'sb_'+config[device.name].side }}
+
+{%- for each_phy_interface in config[device.name].phy_interface_list %}
+interface {{ each_phy_interface.type }}{{ each_phy_interface.id }}
+ no shutdown
+!
+{%- endfor %}

@@ -1,0 +1,27 @@
+{#
+SB Migration Template v0.1
+Format: Jinja2 + YAML
+Author: D. Fauluchi
+Configuration Source: Cisco_Pre-Post_Checks_V0.1
+#}
+!
+{%- if config[device.name].side=='even' %}
+{%- set pair = config[device.name].role + '_odd' %}
+{%- else %}
+{%- set pair = config[device.name].role + '_even' %}
+{%- endif %}
+{#- Check SB BGP Lo0 Adv #}
+! {{ config[device.name].hostname.upper() }}
+{%- set legacy_drc = 'drc_legacy_' + config[device.name].side %}
+!
+show run int lo0
+sh run | sec {{ config[device.name].lo0_prefix_name }}
+sh run | sec {{ config[device.name].lo0_prefix_name_2 }}
+sh ip bgp neighbors {{ config[device.name].bgp_neighbor_drc }} advertised-routes
+sh ip bgp neighbors {{ config[device.name].bgp_neighbor_drc }} advertised-routes | in {{ config[device.name].lo0 }}
+
+!
+! {{ config[legacy_drc].hostname.upper() }}
+!
+sh bgp ipv4 unicast neighbors {{ config[device.name].bgp_neighbor_sb }} routes 
+sh bgp ipv4 unicast neighbors {{ config[device.name].bgp_neighbor_sb }} routes | in "{{ config[device.name].lo0 }}|{{ config[pair].lo0 }}"

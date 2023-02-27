@@ -1,0 +1,66 @@
+{#
+SB DRC Migration Template v0.1
+Format: Jinja2 + YAML
+Author: D. Fauluchi
+Configuration Source: Cisco_Pre-Post_Checks_V0.1
+#}
+!
+{#- SB L3 bgp & subif shutdown #}
+! {{ config[device.name].hostname.upper() }}
+{%- set drc='drc_legacy_'+ config[device.name].side  %}
+!
+show run formal | inc {{ config[drc].hostname.upper() }}
+!
+!!!***Validate neighbors to {{ config[drc].hostname.upper() }} (AS65137), will be already down***!!!
+Show bgp all vrf all ipv4 unicast summary
+Show bgp all vrf all ipv4 unicast summary | inc 65137
+Show bgp all vrf all ipv6 unicast summary | inc 65137
+
+!!!!!!!!! BGP shutdown to {{ config[drc].hostname.upper() }} !!!!!!!!!
+config t
+!
+router bgp 65137
+{%- for each_bgp_neighbor in config[device.name].bgp_neighbor_list%}
+{%- if 'vrf' in each_bgp_neighbor %}
+ vrf {{ each_bgp_neighbor.vrf }}
+{%- endif %}
+  neighbor {{ each_bgp_neighbor.neighbor }}
+   shutdown
+   exit
+{%- if 'vrf' in each_bgp_neighbor %}
+  exit
+{%- endif %}
+!
+{%- endfor %}
+!
+end
+!
+!!! Validate ping sweep and Application before moving further !!! 
+config t
+!!!!!!!!!Sub-interface shutdown !!!!!!!!!!
+show ip int brief vrf all | inc Po1
+show ipv6 int brief vrf all | inc Po1
+!!!***Validate sub-interfaces Po1.{%- for each_po_subinterface in config[device.name].po_subinterface_list %}{{ each_po_subinterface.dot1q }} {%- endfor %} status***!!!
+{%- for each_po_subinterface in config[device.name].po_subinterface_list %}
+show run int po1.{{ each_po_subinterface.dot1q }}
+{%- endfor %}
+!
+{%- for each_po_subinterface in config[device.name].po_subinterface_list %}
+interface Po{{ config[device.name].uplink_lacp.po_id }}.{{ each_po_subinterface.dot1q }}
+ shutdown
+!
+{%- endfor %}
+!
+interface Po{{ config[device.name].uplink_lacp.po_id }}
+ shutdown
+!
+do show bundle Po{{ config[device.name].uplink_lacp.po_id }}
+!!!***Validate interfaces before shutdown***!!!
+{%- for each_phy_interface in config[device.name].phy_interface_list %}
+interface {{each_phy_interface.type}}{{each_phy_interface.id}}
+ shutdown
+!
+{%- endfor %}
+!
+end
+copy run start

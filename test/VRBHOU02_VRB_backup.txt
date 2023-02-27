@@ -1,0 +1,11 @@
+
+!
+! VRBHOU02 Configuration Backup
+!
+dir bootflash:
+
+Check if there is sufficient memory available on bootflash:
+
+Config Backup:
+
+#copy running-config bootflash:Backup_CR44556677_mmddyyyy

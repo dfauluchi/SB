@@ -1,0 +1,97 @@
+
+!
+! VRWHOU01 L3 Interface configurations !
+!
+show run int po1
+!!! not existing !!!
+show interface description | inc 1/49
+!!! All interfaces are in Cable-Testing Mode!!!
+
+configure t
+!
+interface Ethernet1/49
+ no description
+ no ip address
+!
+interface Ethernet1/49
+ no ip address
+ description 5163.111_DSCHOU11_Po600.2_NMNET
+ no switchport
+ mtu 9202
+ channel-group 1 mode active
+ shutdown
+!
+interface  port-channel1
+ description NEWPo1_description_vrwhou01
+ no switchport
+ mtu 9202
+ shutdown
+!
+interface port-channel1.109
+ description 1163.117_DRCHOU21_Po1.2_NMNET
+ encapsulation dot1q 109
+ vrf member NMNET
+ ip address 10.240.137.104/31
+ no ip redirect
+ mtu 9198
+ no bfd echo
+ bfd interval 250 min_rx 250 multiplier 3
+ shutdown
+!
+interface port-channel1.223
+ description 1163.117_DRCHOU21_Po1.3_IPv4_Default
+ encapsulation dot1q 223
+ ip address 10.177.115.226/31
+ no ip redirect
+ mtu 9198
+ no bfd echo
+ bfd interval 250 min_rx 250 multiplier 3
+ shutdown
+!
+interface port-channel1.310
+ description 1163.117_DRCHOU21_Po1.4_METROE_E
+ encapsulation dot1q 310
+ vrf member METROE-E
+ ip address 10.177.115.228/31
+ no ip redirect
+ mtu 9198
+ no bfd echo
+ bfd interval 250 min_rx 250 multiplier 3
+ shutdown
+!
+interface port-channel1.415
+ description 1163.117_DRCHOU21_Po1.5_IPv4_GI
+ encapsulation dot1q 415
+ vrf member Gi
+ ip address 10.177.115.230/31
+ no ip redirect
+ mtu 9198
+ no bfd echo
+ bfd interval 250 min_rx 250 multiplier 3
+ shutdown
+!
+interface port-channel1.416
+ description 1163.117_DRCHOU21_Po1.7_ IPv6-GI
+ encapsulation dot1q 416
+ vrf member Gi
+ ipv6 address fd00:976a:c307:2859:97c8:77a3:0:a/127
+ no ipv6 nd redirect
+ mtu 9198
+ no bfd echo
+ bfd interval 250 min_rx 250 multiplier 3
+ shutdown
+!
+interface port-channel1.1215
+ description 1163.117_DRCHOU21_Po1.8_IPV6SUB
+ encapsulation dot1q 1215
+ vrf member IPV6SUB
+ ipv6 address fd00:976a:c307:2859:97c8:77a4:0:a/127
+ no ipv6 nd redirect
+ mtu 9198
+ no bfd echo
+ bfd interval 250 min_rx 250 multiplier 3
+ shutdown
+!
+end
+!
+copy run start

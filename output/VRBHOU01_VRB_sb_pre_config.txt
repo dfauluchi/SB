@@ -1,0 +1,99 @@
+
+!
+! VRBHOU01 L3 Interface configurations !
+!
+show run int po1
+!!! not existing !!!
+show interface description | inc 1/54
+show interface description | inc Inventada
+!!! All interfaces are in Cable-Testing Mode!!!
+
+configure t
+!
+interface Ethernet1/54
+ no description
+ no ip address
+!
+interface EthernetInventada
+ no description
+ no ip address
+!
+interface Ethernet1/54
+ no ip address
+ description 0162.010_DSCHOU11_E6-03
+ no switchport
+ mtu 9202
+ channel-group 1 mode active
+ shutdown
+!
+interface EthernetInventada
+ no ip address
+ description Noexiste
+ no switchport
+ mtu 9202
+ channel-group 1 mode active
+ shutdown
+!
+interface  port-channel1
+ description 100G_BUNDLE_to_0162.010_DSCHOU11_Po616_CORENET
+ no switchport
+ mtu 9202
+ shutdown
+!
+interface port-channel1.106
+ description 0162.007_DRCHOU51_BE651.106_VRF_NMNET_via_DSCHOU11_Po616
+ encapsulation dot1q 106
+ vrf member NMNET
+ ip address 10.240.137.83/31
+ no ip redirect
+ mtu 9198
+ no bfd echo
+ bfd interval 250 min_rx 250 multiplier 3
+ shutdown
+!
+interface port-channel1.213
+ description 0162.007_DRCHOU51_BE651.213_Default_via_DSCHOU11_Po616
+ encapsulation dot1q 213
+ ip address 10.177.115.165/31
+ no ip redirect
+ mtu 9198
+ no bfd echo
+ bfd interval 250 min_rx 250 multiplier 3
+ shutdown
+!
+interface port-channel1.407
+ description 0162.007_DRCHOU51_BE651.407_VRF_GI_IPV4_via_DSCHOU11_Po616
+ encapsulation dot1q 407
+ vrf member GI
+ ip address 10.177.115.167/31
+ no ip redirect
+ mtu 9198
+ no bfd echo
+ bfd interval 250 min_rx 250 multiplier 3
+ shutdown
+!
+interface port-channel1.408
+ description 0162.007_DRCHOU51_BE651.408_VRF_GI_IPV6_via_DSCHOU11_Po616
+ encapsulation dot1q 408
+ vrf member GI
+ ipv6 address fd00:976a:c307:2859:97c8:7784:0:b/127
+ no ipv6 nd redirect
+ mtu 9198
+ no bfd echo
+ bfd interval 250 min_rx 250 multiplier 3
+ shutdown
+!
+interface port-channel1.1206
+ description 0162.007_DRCHOU51_BE651.1206_VRF_IPV6SUB_via_DSCHOU11_Po616
+ encapsulation dot1q 1206
+ vrf member IPV6SUB
+ ipv6 address fd00:976a:c307:2859:97c8:7785:0:b/127
+ no ipv6 nd redirect
+ mtu 9198
+ no bfd echo
+ bfd interval 250 min_rx 250 multiplier 3
+ shutdown
+!
+end
+!
+copy run start

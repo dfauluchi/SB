@@ -1,0 +1,11 @@
+
+!
+! VRBHOU02
+!
+config t
+!
+ip prefix-list SB-IPV4-ASSIGNED-SPACE seq 200 permit 10.169.11.19/32
+!
+end
+!
+copy run start

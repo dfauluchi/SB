@@ -1,0 +1,15 @@
+
+DSCHOU11 
+!
+show port-channel summary
+show int status | in VRBHOU
+
+!!!***Verify Port-channel 620 is up and all interfaces Eth6/5 are up***!!!
+!!!***Verify Power level is OK for the interfaces***!!!
+show run int Eth6/5
+show int Eth6/5 transceiver details
+show int Eth6/5 | inc error
+Show run int po620
+Show run int po651
+show vlan brief
+!!! Vlans 109 216 305 411 412 1209 should not be existing !!!

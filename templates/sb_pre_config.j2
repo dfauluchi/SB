@@ -1,0 +1,65 @@
+{#
+SB DRC Migration Template v0.1
+Format: Jinja2 + YAML
+Author: D. Fauluchi
+Configuration Source: Cisco_Pre-Post_Checks_V0.1
+#}
+!
+{#- SB L3 subif configurations #}
+! {{ config[device.name].hostname.upper() }} L3 Interface configurations !
+!
+show run int po{{ config[device.name].uplink_lacp.po_id }}
+!!! not existing !!!
+{%- for each_new_phy_interface in config[device.name].new_phy_interface_list %}
+show interface description | inc {{ each_new_phy_interface.id }}
+{%- endfor %}
+!!! All interfaces are in Cable-Testing Mode!!!
+
+configure t
+!
+{%- for each_new_phy_interface in config[device.name].new_phy_interface_list %}
+interface Ethernet{{ each_new_phy_interface.id }}
+ no description
+ no ip address
+!
+{%- endfor %}
+{%- for each_new_phy_interface in config[device.name].new_phy_interface_list %}
+interface Ethernet{{ each_new_phy_interface.id }}
+ no ip address
+ description {{ each_new_phy_interface.description }}
+ no switchport
+ mtu {{ each_new_phy_interface.mtu }}
+ channel-group 1 mode active
+ shutdown
+!  
+{%- endfor %}
+interface  port-channel{{ config[device.name].uplink_lacp.po_id }}
+ description {{ config[device.name].uplink_lacp.po_new_description }}
+ no switchport
+ mtu {{ config[device.name].uplink_lacp.po_mtu }}
+ shutdown
+!
+{%- for each_po_subinterface in config[device.name].po_subinterface_list %}
+interface port-channel{{ config[device.name].uplink_lacp.po_id }}.{{ each_po_subinterface.new_dot1q }}
+ description {{ each_po_subinterface.new_description }}
+ encapsulation dot1q {{ each_po_subinterface.new_dot1q }}
+{%- if 'vrf' in each_po_subinterface %}
+ vrf member {{ each_po_subinterface.vrf }}
+{%- endif %}
+{%- if 'ipv4_address' in each_po_subinterface %}
+ ip address {{ each_po_subinterface.ipv4_address }}
+ no ip redirect
+{%- endif %}
+{%- if 'ipv6_address' in each_po_subinterface %}
+ ipv6 address {{ each_po_subinterface.ipv6_address }}
+ no ipv6 nd redirect
+{%- endif %}
+ mtu {{ each_po_subinterface.mtu }}
+ no bfd echo
+ bfd interval 250 min_rx 250 multiplier 3
+ shutdown
+!
+{%- endfor %}
+end
+!
+copy run start

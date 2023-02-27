@@ -1,0 +1,17 @@
+
+!
+!! Below VRSHOU01/VRSHOU02 Lo0 ping and traceroute will be captured at every path change section
+
+DRCNRT51 to VRSHOU01 Lo0:
+ping 10.169.11.19
+traceroute 10.169.11.19
+!
+DRCNRT51 to VRSHOU02 Lo0:
+ping 10.169.11.20
+traceroute 10.169.11.20
+
+
+VRSHOU01/VRSHOU02 to DRCNRT51 Lo0:
+Ping 10.169.14.148
+Traceroute 10.169.14.148
+!

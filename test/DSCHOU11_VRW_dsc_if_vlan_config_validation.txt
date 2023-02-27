@@ -1,0 +1,20 @@
+
+DSCHOU11 
+!
+show run int 620
+!!!***Po616 does not exist ***!!!
+!
+!!!***Check new interfaces are in Auto_Cable_Testing mode and up/up ***!!!
+show interface status | i VRWHOU01
+show interface description | inc 6/6
+show run int Eth6/6
+show interface Eth6/6 transceiver details
+show int Eth6/6 | inc error
+show vlan brief
+show interface description | inc 6/7
+show run int Eth6/7
+show interface Eth6/7 transceiver details
+show int Eth6/7 | inc error
+show vlan brief
+
+!!! Vlans 109 223 310 415 416 1215 should not be existing !!!

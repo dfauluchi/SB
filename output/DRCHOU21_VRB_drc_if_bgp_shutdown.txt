@@ -1,0 +1,94 @@
+
+!
+! DRCHOU21 L3 Interface & BGP shutdown !
+!
+show run formal | inc VRBHOU01
+!
+!!!***Validate the Neighbors before shutdown***!!!
+config t
+!
+router bgp 65137
+  neighbor 10.166.112.83
+   shutdown
+   exit
+!
+ vrf METROE-E
+  neighbor 10.166.112.87
+   shutdown
+   exit
+  exit
+!
+ vrf GI
+  neighbor 10.166.112.91
+   shutdown
+   exit
+  exit
+!
+ vrf GI
+  neighbor fd00:976a:14f3:193f::5:b
+   shutdown
+   exit
+  exit
+!
+ vrf IPV6SUB
+  neighbor fd00:976a:14f3:193f::2:b
+   shutdown
+   exit
+  exit
+!
+ vrf NMNET
+  neighbor 10.249.32.207
+   shutdown
+   exit
+  exit
+!
+root
+!
+show config
+!
+commit label CR44556677_714_DnVRBHOU01-1
+!!! Validate ping sweep and Application before moving further !!! 
+config t
+!
+interface Bundle-Ether190.2
+ shutdown
+!
+interface Bundle-Ether190.3
+ shutdown
+!
+interface Bundle-Ether190.4
+ shutdown
+!
+interface Bundle-Ether190.5
+ shutdown
+!
+interface Bundle-Ether190.7
+ shutdown
+!
+interface Bundle-Ether190.8
+ shutdown
+!
+!
+interface Bundle-Ether190
+ shutdown
+!
+do show bundle bundle-ether 190
+!!!***Validate interfaces before shutdown***!!!
+interface TenGigE0/1/0/1
+ shutdown
+!
+interface TenGigE0/1/0/2
+ shutdown
+!
+interface TenGigE0/1/0/3
+ shutdown
+!
+interface TenGigE0/1/0/4
+ shutdown
+!
+!
+root
+!
+show config
+!
+commit label CR44556677_714_DnVRBHOU01-2

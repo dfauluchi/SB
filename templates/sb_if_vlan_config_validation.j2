@@ -1,0 +1,19 @@
+{#
+SB DRC Migration Template v0.1
+Format: Jinja2 + YAML
+Author: D. Fauluchi
+Configuration Source: Cisco_Pre-Post_Checks_V0.1
+#}
+{#- SB Interface and VLANs config validation #}
+{{ config[device.name].hostname.upper() }} 
+!
+!
+show interface status
+{%- for each_new_phy_interface in config[device.name].new_phy_interface_list%}
+show interface description | inc {{ each_new_phy_interface.id }}
+show interface {{ each_new_phy_interface.interface }} transceiver details
+{%- endfor %}
+!!!***Check both new interfaces are in Auto_Cable_Testing mode and up/up ***!!!
+!
+show vlan brief
+!!! Vlans {%-for each_po_subinterface in config[device.name].po_subinterface_list%} {{each_po_subinterface.new_dot1q}}  {%- endfor %} should not be existing !!!

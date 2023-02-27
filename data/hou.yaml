@@ -1,0 +1,1926 @@
+--- # YAML Input File for SB DRC Migration Template v0.2
+# Values entered below are for representation purpose only. Not the actual values.
+VRW:
+    use_legacy_dsc: no
+    cr: CR11223344
+    drc_legacy_odd: 
+        hostname: drchou21
+        role: drc
+        side: odd
+        unit: disk0
+        bgp_as: 65137 
+        be_id: 268
+        be_min_links: 2
+        bundle_subinterface_list:
+          - bundle_subinterface: Bundle-Ether268.2
+            description: 0163.07_VRWHOU01_Po1.2_NMNET
+            dot1q: 2
+            vrf: NMNET
+            ipv4_address: 10.240.137.104/31
+          - bundle_subinterface: Bundle-Ether268.3
+            description: 0163.07_VRWHOU01_Po1.3_IPv4_Default
+            dot1q: 3
+            ipv4_address: 10.177.115.226/31
+          - bundle_subinterface: Bundle-Ether268.4
+            description: 0163.07_VRWHOU01_Po1.4_METROE_E
+            dot1q: 4
+            vrf: METROE-E
+            ipv4_address: 10.177.115.228/31
+          - bundle_subinterface: Bundle-Ether268.5
+            description: 0163.07_VRWHOU01_Po1.5_IPv4_GI
+            dot1q: 5
+            vrf: Gi
+            ipv4_address: 10.177.115.230/31
+          - bundle_subinterface: Bundle-Ether268.7
+            description: 0163.07_VRWHOU01_Po1.7_ IPv6-GI
+            dot1q: 7
+            vrf: Gi
+            ipv6_address: fd00:976a:c307:2859:97c8:77a3:0:a/127
+          - bundle_subinterface: Bundle-Ether268.8
+            description: 0163.07_VRWHOU01_Po1.8_IPV6SUB
+            dot1q: 8
+            vrf: IPV6SUB
+            ipv6_address: fd00:976a:c307:2859:97c8:77a4:0:a/127
+        bgp_neighbor_list:
+          - neighbor: 10.166.112.83 
+            neighbor_group: SB-IPV4-GROUP
+            description: VRCNLV01_IPv4_Global 
+            af: ipv4
+            default_originate: true
+          - neighbor: 10.166.112.87
+            remote_as: 65138
+            neighbor_group: SB-IPV4-GROUP 
+            vrf: METROE-E 
+            description: VRCPTL01_VRF_METROE-E 
+            af: ipv4
+            default_originate: true
+            route_policy_out: RP_METROE-E_OUT
+          - neighbor: 10.166.112.91
+            password: 3ncr1p73d
+            vrf: GI 
+            neighbor_group: SB-IPV4-GROUP 
+            description: VRCNLV01_vrf_Gi 
+            af: ipv4
+            default_originate: true
+          - neighbor: fd00:976a:14f3:193f::5:b 
+            vrf: GI
+            neighbor_group: SB-IPV6-GROUP 
+            description: VRCNLV01_vrf_GI-V6 
+            af: ipv6
+            default_originate: true
+            route_policy_out: RP_DEFAULT_OUT
+            route_policy_in: RP_DEFAULT_IN
+          - neighbor: fd00:976a:14f3:193f::2:b 
+            vrf: IPV6SUB 
+            neighbor_group: SB-IPV6-GROUP 
+            description: VRCNLV01_vrf_IPV6SUB 
+            af: ipv6
+            default_originate: true
+          - neighbor: 10.249.32.207 
+            vrf: NMNET 
+            description: VRCNLV01_vrf_NMNET 
+            af: ipv4
+            default_originate: true
+            route_policy_in: RP_NMNET_IN
+        static_route_list:
+          - route: 10.164.161.252/30
+            af: ipv4
+            interface: Bundle-Ether268.3
+            next_hop: 10.164.161.254
+          - route: fd00:976a:b69a:a1c1:186f:41f6:0:a/127
+            af: ipv6
+            vrf: default
+            interface: Bundle-Ether268.xx
+            next_hop: fd00:976a:b69a:a1c1:186f:41f6:0:b
+        phy_interface_list:
+          - interface: TenGigE0/2/2/1
+            type: TenGigE
+            id: 0/2/2/1
+            description: TBD_description_TenGigE0/2/2/1
+          - interface: TenGigE0/2/2/2
+            type: TenGigE
+            id: 0/2/2/2
+            description: TBD_description_TenGigE0/2/2/2
+          - interface: TenGigE0/2/2/3
+            type: TenGigE
+            id: 0/2/2/3
+            description: TBD_description_TenGigE0/2/2/3
+          - interface: TenGigE0/2/2/4
+            type: TenGigE
+            id: 0/2/2/4
+            description: TBD_description_TenGigE0/2/2/4
+    drc_legacy_even:
+        hostname: drchou22
+        role: drc
+        side: even
+        unit: disk0
+        bgp_as: 65137 
+        be_id: 268
+        be_min_links: 2
+        bundle_subinterface_list:
+          - bundle_subinterface: Bundle-Ether268.2
+            description: 0163.07_VRWHOU01_Po1.2_NMNET
+            dot1q: 2
+            vrf: NMNET
+            ipv4_address: 10.240.137.104/31
+          - bundle_subinterface: Bundle-Ether268.3
+            description: 0163.07_VRWHOU01_Po1.3_IPv4_Default
+            dot1q: 3
+            ipv4_address: 10.177.115.226/31
+          - bundle_subinterface: Bundle-Ether268.4
+            description: 0163.07_VRWHOU01_Po1.4_METROE_E
+            dot1q: 4
+            vrf: METROE-E
+            ipv4_address: 10.177.115.228/31
+          - bundle_subinterface: Bundle-Ether268.5
+            description: 0163.07_VRWHOU01_Po1.5_IPv4_GI
+            dot1q: 5
+            vrf: Gi
+            ipv4_address: 10.177.115.230/31
+          - bundle_subinterface: Bundle-Ether268.7
+            description: 0163.07_VRWHOU01_Po1.7_ IPv6-GI
+            dot1q: 7
+            vrf: Gi
+            ipv6_address: fd00:976a:c307:2859:97c8:77a3:0:a/127
+          - bundle_subinterface: Bundle-Ether268.8
+            description: 0163.07_VRWHOU01_Po1.8_IPV6SUB
+            dot1q: 8
+            vrf: IPV6SUB
+            ipv6_address: fd00:976a:c307:2859:97c8:77a4:0:a/127
+        bgp_neighbor_list:
+          - neighbor: 10.166.112.83 
+            neighbor_group: SB-IPV4-GROUP
+            description: VRCNLV01_IPv4_Global 
+            af: ipv4
+            default_originate: true
+          - neighbor: 10.166.112.87
+            remote_as: 65138
+            neighbor_group: SB-IPV4-GROUP 
+            vrf: METROE-E 
+            description: VRCPTL01_VRF_METROE-E 
+            af: ipv4
+            default_originate: true
+            route_policy_out: RP_METROE-E_OUT
+          - neighbor: 10.166.112.91
+            password: 3ncr1p73d
+            vrf: GI 
+            neighbor_group: SB-IPV4-GROUP 
+            description: VRCNLV01_vrf_Gi 
+            af: ipv4
+            default_originate: true
+          - neighbor: fd00:976a:14f3:193f::5:b 
+            vrf: GI 
+            neighbor_group: SB-IPV6-GROUP 
+            description: VRCNLV01_vrf_GI-V6 
+            af: ipv6
+            default_originate: true
+            route_policy_out: RP_DEFAULT_OUT
+            route_policy_in: RP_DEFAULT_IN
+          - neighbor: fd00:976a:14f3:193f::2:b 
+            vrf: IPV6SUB 
+            neighbor_group: SB-IPV6-GROUP 
+            description: VRCNLV01_vrf_IPV6SUB 
+            af: ipv6
+            default_originate: true
+          - neighbor: 10.249.32.207 
+            vrf: NMNET 
+            description: VRCNLV01_vrf_NMNET 
+            af: ipv4
+            default_originate: true
+            route_policy_in: RP_NMNET_IN
+        static_route_list:
+          - route: 10.164.161.252/30
+            af: ipv4
+            interface: Bundle-Ether268.3
+            next_hop: 10.164.161.254
+          - route: fd00:976a:b69a:a1c1:186f:41f6:0:a/127
+            af: ipv6
+            vrf: default
+            interface: Bundle-Ether268.xx
+            next_hop: fd00:976a:b69a:a1c1:186f:41f6:0:b
+        phy_interface_list:
+          - interface: TenGigE0/2/2/1
+            type: TenGigE
+            id: 0/2/2/1
+            description: TBD_description_TenGigE0/2/2/1
+          - interface: TenGigE0/2/2/2
+            type: TenGigE
+            id: 0/2/2/2
+            description: TBD_description_TenGigE0/2/2/2
+          - interface: TenGigE0/2/2/3
+            type: TenGigE
+            id: 0/2/2/3
+            description: TBD_description_TenGigE0/2/2/3
+          - interface: TenGigE0/2/2/4
+            type: TenGigE
+            id: 0/2/2/4
+            description: TBD_description_TenGigE0/2/2/4
+    dsc_legacy_odd: 
+        hostname: dschou01
+        unit: bootflash
+        role: dsc
+        side: odd
+    dsc_legacy_even: 
+        hostname: dschou02
+        unit: bootflash
+        role: dsc
+        side: even
+    sb_odd: 
+        hostname: vrwhou01
+        unit: bootflash
+        role: sb
+        side: odd
+        lo0: 10.169.11.19
+        lo0_prefix_name: SB-IPV4-ASSIGNED-SPACE
+        lo0_prefix_name_2: SB-IPV4-ASSIGNED-SPACE-ONLY
+        lo0_prefix_id: 200
+        bgp_as: 65138
+        bgp_neighbor_drc: 10.177.115.226
+        bgp_neighbor_sb: 10.177.115.227
+        uplink_lacp:
+            po_id: 1
+            po_mtu: 9202
+            po_min_links: 2
+            po_description: Po1_description_vrwhou01
+            po_new_description: NEWPo1_description_vrwhou01
+        po_subinterface_list:
+          - po_subinterface: port-channel1.2
+            description: 1163.117_DRCHOU21_Po1.2_NMNET
+            new_description: 1163.117_DRCHOU21_Po1.2_NMNET
+            dot1q: 2
+            new_dot1q: 109
+            vrf: NMNET
+            ipv4_address: 10.240.137.104/31
+            mtu: 9198
+          - po_subinterface: port-channel1.3
+            description: 1163.117_DRCHOU21_Po1.3_IPv4_Default
+            new_description: 1163.117_DRCHOU21_Po1.3_IPv4_Default
+            dot1q: 3
+            new_dot1q: 223
+            ipv4_address: 10.177.115.226/31
+            mtu: 9198
+          - po_subinterface: port-channel1.4
+            description: 1163.117_DRCHOU21_Po1.4_METROE_E
+            new_description: 1163.117_DRCHOU21_Po1.4_METROE_E
+            dot1q: 4
+            new_dot1q: 310
+            vrf: METROE-E
+            ipv4_address: 10.177.115.228/31
+            mtu: 9198
+          - po_subinterface: port-channel1.5
+            description: 1163.117_DRCHOU21_Po1.5_IPv4_GI
+            new_description: 1163.117_DRCHOU21_Po1.5_IPv4_GI
+            dot1q: 5
+            new_dot1q: 415
+            vrf: Gi
+            ipv4_address: 10.177.115.230/31
+            mtu: 9198
+          - po_subinterface: port-channel1.7
+            description: 1163.117_DRCHOU21_Po1.7_ IPv6-GI
+            new_description: 1163.117_DRCHOU21_Po1.7_ IPv6-GI
+            dot1q: 7
+            new_dot1q: 416
+            vrf: Gi
+            ipv6_address: fd00:976a:c307:2859:97c8:77a3:0:a/127
+            mtu: 9198
+          - po_subinterface: port-channel1.8
+            description: 1163.117_DRCHOU21_Po1.8_IPV6SUB
+            new_description: 1163.117_DRCHOU21_Po1.8_IPV6SUB
+            dot1q: 8
+            new_dot1q: 1215
+            vrf: IPV6SUB
+            ipv6_address: fd00:976a:c307:2859:97c8:77a4:0:a/127
+            mtu: 9198
+        phy_interface_list:
+          - interface: Eth1/50
+            type: Eth
+            id: 1/50
+            description: 0163.111_DRCHOU21_Po1.2_NMNET
+            mtu: 9202
+        new_phy_interface_list:
+          - interface: Eth1/49
+            type: Eth
+            id: 1/49
+            description: 5163.111_DSCHOU11_Po600.2_NMNET
+            mtu: 9202
+        bgp_neighbor_list:
+          - neighbor: 10.177.115.164
+            af: ipv4
+          - neighbor: 10.177.115.166
+            af: ipv4
+            vrf: GI
+          - neighbor: fd00:976a:c307:2859:97c8:7784:0:a
+            af: ipv6
+            vrf: GI
+          - neighbor: 10.240.137.82
+            af: ipv4
+            vrf: NMNET
+          - neighbor: fd00:976a:c307:2859:97c8:7785:0:a
+            af: ipv6
+            vrf: IPV6SUB
+    sb_even: 
+        hostname: vrwhou02
+        role: sb
+        side: even
+        unit: bootflash
+        lo0: 10.169.11.20
+        lo0_prefix_name: SB-IPV4-ASSIGNED-SPACE
+        lo0_prefix_name_2: SB-IPV4-ASSIGNED-SPACE-ONLY
+        lo0_prefix_id: 200
+        bgp_as: 65138
+        bgp_neighbor_drc: 10.177.115.232
+        bgp_neighbor_sb: 10.177.115.233
+        uplink_lacp:
+            po_id: 1
+            po_mtu: 9202
+            po_min_links: 2
+            po_new_description: NEWPo1_description_vrwhou02
+            po_description: Po1_description_vrwhou02
+        phy_interface_list:
+          - interface: Eth1/50
+            type: Eth
+            id: 1/50
+            description: 0163.222_DRCHOU22_Po1.2_NMNET
+            mtu: 9202
+        new_phy_interface_list:
+          - interface: Eth1/49
+            type: Eth
+            id: 1/49
+            description: 8163.222_DSCHOU12_Po619.2_NMNET
+            mtu: 9202
+        po_subinterface_list:
+          - po_subinterface: port-channel1.2
+            new_description: 1163.888_DRCHOU22_Po1.2_NMNET
+            description: 1163.888_DRCHOU22_Po1.2_NMNET
+            dot1q: 2
+            new_dot1q: 109
+            vrf: NMNET
+            ipv4_address: 20.240.137.104/31
+            mtu: 9198
+          - po_subinterface: port-channel1.3
+            new_description: 1163.888_DRCHOU22_Po1.3_IPv4_Default
+            description: 1163.888_DRCHOU22_Po1.3_IPv4_Default
+            dot1q: 3
+            new_dot1q: 223
+            ipv4_address: 20.177.115.226/31
+            mtu: 9198
+          - po_subinterface: port-channel1.4
+            new_description: 1163.888_DRCHOU22_Po1.4_METROE_E
+            description: 1163.888_DRCHOU22_Po1.4_METROE_E
+            dot1q: 4
+            new_dot1q: 310
+            vrf: METROE-E
+            ipv4_address: 20.177.115.228/31
+            mtu: 9198
+          - po_subinterface: port-channel1.5
+            new_description: 1163.888_DRCHOU22_Po1.5_IPv4_GI
+            description: 1163.888_DRCHOU22_Po1.5_IPv4_GI
+            dot1q: 5
+            new_dot1q: 415
+            vrf: Gi
+            ipv4_address: 20.177.115.230/31
+            mtu: 9198
+          - po_subinterface: port-channel1.7
+            new_description: 1163.888_DRCHOU22_Po1.7_ IPv6-GI
+            description: 1163.888_DRCHOU22_Po1.7_ IPv6-GI
+            dot1q: 7
+            new_dot1q: 416
+            vrf: Gi
+            ipv6_address: fd20:976a:c307:2859:97c8:77a3:0:a/127
+            mtu: 9198
+          - po_subinterface: port-channel1.8
+            new_description: 1163.888_DRCHOU22_Po1.8_IPV6SUB
+            description: 1163.888_DRCHOU22_Po1.8_IPV6SUB
+            dot1q: 8
+            new_dot1q: 1215
+            vrf: IPV6SUB
+            ipv6_address: fd20:976a:c307:2859:97c8:77a4:0:a/127
+            mtu: 9198
+        bgp_neighbor_list:
+          - neighbor: 10.177.115.168
+            af: ipv4
+          - neighbor: 10.177.115.170
+            vrf: GI 
+            af: ipv4
+          - neighbor: fd00:976a:c307:2859:97c8:7786:0:a
+            vrf: GI 
+            af: ipv6
+          - neighbor: 10.240.137.84
+            vrf: NMNET 
+            af: ipv4
+          - neighbor: fd00:976a:c307:2859:97c8:7787:0:a
+            vrf: IPV6SUB 
+            af: ipv6
+    drc_odd:
+        hostname: drchou51
+        role: drc
+        side: odd
+        unit: disk0
+        be_id: 651
+        bgp_as: 65137 
+        bundle_subinterface_list:
+          - bundle_subinterface: Bundle-Ether651.109
+            description: 0163.07_VRWHOU01_Po1.2_NMNET
+            dot1q: 109
+            vrf: NMNET
+            ipv4_address: 10.240.137.104/31
+          - bundle_subinterface: Bundle-Ether651.223
+            description: 0163.07_VRWHOU01_Po1.3_IPv4_Default
+            dot1q: 223
+            ipv4_address: 10.177.115.226/31
+          - bundle_subinterface: Bundle-Ether651.310
+            description: 0163.07_VRWHOU01_Po1.4_METROE_E
+            dot1q: 310
+            vrf: METROE-E
+            ipv4_address: 10.177.115.228/31
+          - bundle_subinterface: Bundle-Ether651.415
+            description: 0163.07_VRWHOU01_Po1.5_IPv4_GI
+            dot1q: 415
+            vrf: GI
+            ipv4_address: 10.177.115.230/31
+          - bundle_subinterface: Bundle-Ether651.416
+            description: 0163.07_VRWHOU01_Po1.7_ IPv6-GI
+            dot1q: 416
+            vrf: GI
+            ipv6_address: fd00:976a:c307:2859:97c8:77a3:0:a/127
+          - bundle_subinterface: Bundle-Ether651.1215
+            description: 0163.07_VRWHOU01_Po1.8_IPV6SUB
+            dot1q: 1215
+            vrf: IPV6SUB
+            ipv6_address: fd00:976a:c307:2859:97c8:77a4:0:a/127
+        bgp_neighbor_list:
+          - neighbor: 10.166.112.83 
+            neighbor_group: SB-IPV4-GROUP
+            description: VRCNLV01_IPv4_Global 
+            af: ipv4
+            default_originate: true
+          - neighbor: 10.166.112.87
+            remote_as: 65138
+            neighbor_group: SB-IPV4-GROUP 
+            vrf: METROE-E 
+            description: VRCPTL01_VRF_METROE-E 
+            af: ipv4
+            default_originate: true
+            route_policy_out: RP_METROE-E_OUT
+          - neighbor: 10.166.112.91
+            password: 3ncr1p73d
+            vrf: GI 
+            neighbor_group: SB-IPV4-GROUP 
+            description: VRCNLV01_vrf_Gi 
+            af: ipv4
+            default_originate: true
+          - neighbor: fd00:976a:14f3:193f::5:b 
+            vrf: GI
+            neighbor_group: SB-IPV6-GROUP 
+            description: VRCNLV01_vrf_GI-V6 
+            af: ipv6
+            default_originate: true
+            route_policy_out: RP_DEFAULT_OUT
+            route_policy_in: RP_DEFAULT_IN
+          - neighbor: fd00:976a:14f3:193f::2:b 
+            vrf: IPV6SUB 
+            neighbor_group: SB-IPV6-GROUP 
+            description: VRCNLV01_vrf_IPV6SUB 
+            af: ipv6
+            default_originate: true
+          - neighbor: 10.249.32.207 
+            vrf: NMNET 
+            description: VRCNLV01_vrf_NMNET 
+            af: ipv4
+            default_originate: true
+            route_policy_in: RP_NMNET_IN
+        static_route_list:
+          - route: 10.164.161.252/30
+            af: ipv4
+            interface: Bundle-Ether651.206
+            next_hop: 10.164.161.254
+          - route: fd00:976a:b69a:a1c1:186f:41f6:0:a/127
+            af: ipv6
+            vrf: default
+            interface: Bundle-Ether651.1202
+            next_hop: fd00:976a:b69a:a1c1:186f:41f6:0:b
+    drc_even:
+        hostname: drchou52
+        role: drc
+        side: even
+        unit: disk0
+        be_id: 651
+        bgp_as: 65137 
+        bundle_subinterface_list:
+          - bundle_subinterface: Bundle-Ether651.109
+            description: 0163.08_VRWHOU02_Po1.2_NMNET
+            dot1q: 109
+            vrf: NMNET
+            ipv4_address: 10.240.137.108/31
+          - bundle_subinterface: Bundle-Ether651.223
+            description: 0163.08_VRWHOU02_Po1.3_IPv4_Default
+            dot1q: 223
+            ipv4_address: 10.177.115.230/31
+          - bundle_subinterface: Bundle-Ether651.310
+            description: 0163.08_VRWHOU02_Po1.4_METROE_E
+            dot1q: 310
+            vrf: METROE-E
+            ipv4_address: 10.177.115.232/31
+          - bundle_subinterface: Bundle-Ether651.415
+            description: 0163.08_VRWHOU02_Po1.5_IPv4_GI
+            dot1q: 415
+            vrf: GI
+            ipv4_address: 10.177.115.234/31
+          - bundle_subinterface: Bundle-Ether651.416
+            description: 0163.08_VRWHOU02_Po1.7_ IPv6-GI
+            dot1q: 416
+            vrf: GI
+            ipv6_address: fd00:976a:c307:2859:97c8:7a5:0:a/127
+          - bundle_subinterface: Bundle-Ether651.1215
+            description: 0163.08_VRWHOU02_Po1.8_IPV6SUB
+            dot1q: 1215
+            vrf: IPV6SUB
+            ipv6_address: fd00:976a:c307:2859:97c8:77a6:0:a/127
+        bgp_neighbor_list:
+          - neighbor: 10.166.112.83 
+            neighbor_group: SB-IPV4-GROUP
+            description: VRCNLV01_IPv4_Global 
+            af: ipv4
+            default_originate: true
+          - neighbor: 10.166.112.87
+            remote_as: 65138
+            neighbor_group: SB-IPV4-GROUP 
+            vrf: METROE-E 
+            description: VRCPTL01_VRF_METROE-E 
+            af: ipv4
+            default_originate: true
+            route_policy_out: RP_METROE-E_OUT
+          - neighbor: 10.166.112.91
+            password: 3ncr1p73d
+            vrf: GI 
+            neighbor_group: SB-IPV4-GROUP 
+            description: VRCNLV01_vrf_Gi 
+            af: ipv4
+            default_originate: true
+          - neighbor: fd00:976a:14f3:193f::5:b 
+            vrf: GI
+            neighbor_group: SB-IPV6-GROUP 
+            description: VRCNLV01_vrf_GI-V6 
+            af: ipv6
+            default_originate: true
+            route_policy_out: RP_DEFAULT_OUT
+            route_policy_in: RP_DEFAULT_IN
+          - neighbor: fd00:976a:14f3:193f::2:b 
+            vrf: IPV6SUB 
+            neighbor_group: SB-IPV6-GROUP 
+            description: VRCNLV01_vrf_IPV6SUB 
+            af: ipv6
+            default_originate: true
+          - neighbor: 10.249.32.207 
+            vrf: NMNET 
+            description: VRCNLV01_vrf_NMNET 
+            af: ipv4
+            default_originate: true
+            route_policy_in: RP_NMNET_IN
+    dsc_odd:
+        hostname: dschou11
+        model: N7K-C7010
+        role: dsc
+        side: odd
+        unit: bootflash
+        drc_po_id: 651
+        sb_po_id: 620
+        sb_po_description: 100G_BUNDLE_TO_0162.11_VRWHOU01_Po1
+        sb_po_bw: 100
+        sb_po_mtu: 9216
+        vlan_set: 109,223,310,415,416,1215
+        vlan_list:
+          - vlan: 109
+            name: DRCHOU51_NMNET_VRF_10.240.137.104/31
+          - vlan: 223
+            name: DRCHOU51_Default_10.177.115.226/31
+          - vlan: 310
+            name: DRCHOU51_IPv6_METROE-E_10.177.115.228/31
+          - vlan: 415
+            name: DRCHOU51_GI_VRF_10.177.115.230/31
+          - vlan: 416
+            name: DRCHOU51_IPv6_GI_VRF_fd00:976a:c307:2859:97c8:77a3:0:a/127
+          - vlan: 1215
+            name: DRCHOU51_IPv6_IPV6SUB_VRF_fd00:976a:c307:2859:97c8:77a4:0:a/127
+        phy_interface_list:
+          - interface: Eth6/6
+            type: Eth
+            id: 6/6
+            description: 0162.11_VRWHOU01_Eth1/53
+            mtu: 9216
+          - interface: Eth6/7
+            type: Eth
+            id: 6/7
+            description: 0162.11_VRWHOU01_Eth1/52
+            mtu: 9216
+    dsc_even:
+        hostname: dschou12
+        model: N3K-3408
+        unit: bootflash
+        role: dsc
+        side: even
+        drc_po_id: 651
+        sb_po_id: 619
+        sb_po_description: 100G_BUNDLE_TO_0162.13_VRWHOU02_Po1
+        sb_po_bw: 100
+        sb_po_mtu: 9216
+        vlan_set: 109,223,310,415,416,1215
+        vlan_list:
+          - vlan: 109
+            name: DRCHOU52_NMNET_VRF_10.240.137.108/31
+          - vlan: 223
+            name: DRCHOU52_Default_10.177.115.230/31
+          - vlan: 310
+            name: DRCHOU52_IPv6_METROE-E_10.177.115.232/31
+          - vlan: 415
+            name: DRCHOU52_GI_VRF_10.177.115.234/31
+          - vlan: 416
+            name: DRCHOU52_IPv6_GI_VRF_fd00:976a:c307:2859:97c8:77a5:0:a/127
+          - vlan: 1215
+            name: DRCHOU52_IPv6_IPV6SUB_VRF_fd00:976a:c307:2859:97c8:77a6:0:a/127
+        phy_interface_list:
+          - interface: Eth6/6
+            type: Eth
+            id: 6/6
+            description: 0162.11_VRWHOU01_Eth1/53
+            mtu: 9216
+          - interface: Eth6/7
+            type: Eth
+            id: 6/7
+            description: 0162.11_VRWHOU01_Eth1/52
+            mtu: 9216
+VRB:
+    use_legacy_dsc: no
+    cr: CR44556677
+    drc_legacy_odd: 
+        hostname: drchou21
+        role: drc
+        side: odd
+        unit: disk0
+        bgp_as: 65137 
+        be_id: 190
+        be_min_links: 2
+        bundle_subinterface_list:
+          - bundle_subinterface: Bundle-Ether190.2
+            description: 0163.07_VRBHOU01_Po1.2_NMNET
+            dot1q: 2
+            vrf: NMNET
+            ipv4_address: 10.240.137.104/31
+          - bundle_subinterface: Bundle-Ether190.3
+            description: 0163.07_VRBHOU01_Po1.3_IPv4_Default
+            dot1q: 3
+            ipv4_address: 10.177.115.226/31
+          - bundle_subinterface: Bundle-Ether190.4
+            description: 0163.07_VRBHOU01_Po1.4_METROE_E
+            dot1q: 4
+            vrf: METROE-E
+            ipv4_address: 10.177.115.228/31
+          - bundle_subinterface: Bundle-Ether190.5
+            description: 0163.07_VRBHOU01_Po1.5_IPv4_GI
+            dot1q: 5
+            vrf: Gi
+            ipv4_address: 10.177.115.230/31
+          - bundle_subinterface: Bundle-Ether190.7
+            description: 0163.07_VRBHOU01_Po1.7_ IPv6-GI
+            dot1q: 7
+            vrf: Gi
+            ipv6_address: fd00:976a:c307:2859:97c8:77a3:0:a/127
+          - bundle_subinterface: Bundle-Ether190.8
+            description: 0163.07_VRBHOU01_Po1.8_IPV6SUB
+            dot1q: 8
+            vrf: IPV6SUB
+            ipv6_address: fd00:976a:c307:2859:97c8:77a4:0:a/127
+        bgp_neighbor_list:
+          - neighbor: 10.166.112.83 
+            neighbor_group: SB-IPV4-GROUP
+            description: VRCNLV01_IPv4_Global 
+            af: ipv4
+            default_originate: true
+          - neighbor: 10.166.112.87
+            remote_as: 65138
+            neighbor_group: SB-IPV4-GROUP 
+            vrf: METROE-E 
+            description: VRCPTL01_VRF_METROE-E 
+            af: ipv4
+            default_originate: true
+            route_policy_out: RP_METROE-E_OUT
+          - neighbor: 10.166.112.91
+            password: 3ncr1p73d
+            vrf: GI 
+            neighbor_group: SB-IPV4-GROUP 
+            description: VRCNLV01_vrf_Gi 
+            af: ipv4
+            default_originate: true
+          - neighbor: fd00:976a:14f3:193f::5:b 
+            vrf: GI
+            neighbor_group: SB-IPV6-GROUP 
+            description: VRCNLV01_vrf_GI-V6 
+            af: ipv6
+            default_originate: true
+            route_policy_out: RP_DEFAULT_OUT
+            route_policy_in: RP_DEFAULT_IN
+          - neighbor: fd00:976a:14f3:193f::2:b 
+            vrf: IPV6SUB 
+            neighbor_group: SB-IPV6-GROUP 
+            description: VRCNLV01_vrf_IPV6SUB 
+            af: ipv6
+            default_originate: true
+          - neighbor: 10.249.32.207 
+            vrf: NMNET 
+            description: VRCNLV01_vrf_NMNET 
+            af: ipv4
+            default_originate: true
+            route_policy_in: RP_NMNET_IN
+        static_route_list:
+          - route: 10.164.161.252/30
+            af: ipv4
+            interface: Bundle-Ether190.3
+            next_hop: 10.164.161.254
+          - route: fd00:976a:b69a:a1c1:186f:41f6:0:a/127
+            af: ipv6
+            vrf: default
+            interface: Bundle-Ether190.xx
+            next_hop: fd00:976a:b69a:a1c1:186f:41f6:0:b
+        phy_interface_list:
+          - interface: TenGigE0/1/0/1
+            type: TenGigE
+            id: 0/1/0/1
+            description: TBD_description_TenGigE0/1/0/1
+          - interface: TenGigE0/1/0/2
+            type: TenGigE
+            id: 0/1/0/2
+            description: TBD_description_TenGigE0/1/0/2
+          - interface: TenGigE0/1/0/3
+            type: TenGigE
+            id: 0/1/0/3
+            description: TBD_description_TenGigE0/1/0/3
+          - interface: TenGigE0/1/0/4
+            type: TenGigE
+            id: 0/1/0/4
+            description: TBD_description_TenGigE0/1/0/4
+    drc_legacy_even:
+        hostname: drchou22
+        role: drc
+        side: even
+        unit: disk0
+        bgp_as: 65137 
+        be_id: 190
+        be_min_links: 2
+        bundle_subinterface_list:
+          - bundle_subinterface: Bundle-Ether190.2
+            description: 0163.07_VRBHOU01_Po1.2_NMNET
+            dot1q: 2
+            vrf: NMNET
+            ipv4_address: 10.240.137.104/31
+          - bundle_subinterface: Bundle-Ether190.3
+            description: 0163.07_VRBHOU01_Po1.3_IPv4_Default
+            dot1q: 3
+            ipv4_address: 10.177.115.226/31
+          - bundle_subinterface: Bundle-Ether190.4
+            description: 0163.07_VRBHOU01_Po1.4_METROE_E
+            dot1q: 4
+            vrf: METROE-E
+            ipv4_address: 10.177.115.228/31
+          - bundle_subinterface: Bundle-Ether190.5
+            description: 0163.07_VRBHOU01_Po1.5_IPv4_GI
+            dot1q: 5
+            vrf: Gi
+            ipv4_address: 10.177.115.230/31
+          - bundle_subinterface: Bundle-Ether190.7
+            description: 0163.07_VRBHOU01_Po1.7_ IPv6-GI
+            dot1q: 7
+            vrf: Gi
+            ipv6_address: fd00:976a:c307:2859:97c8:77a3:0:a/127
+          - bundle_subinterface: Bundle-Ether190.8
+            description: 0163.07_VRBHOU01_Po1.8_IPV6SUB
+            dot1q: 8
+            vrf: IPV6SUB
+            ipv6_address: fd00:976a:c307:2859:97c8:77a4:0:a/127
+        bgp_neighbor_list:
+          - neighbor: 10.166.112.83 
+            neighbor_group: SB-IPV4-GROUP
+            description: VRCNLV01_IPv4_Global 
+            af: ipv4
+            default_originate: true
+          - neighbor: 10.166.112.87
+            remote_as: 65138
+            neighbor_group: SB-IPV4-GROUP 
+            vrf: METROE-E 
+            description: VRCPTL01_VRF_METROE-E 
+            af: ipv4
+            default_originate: true
+            route_policy_out: RP_METROE-E_OUT
+          - neighbor: 10.166.112.91
+            password: 3ncr1p73d
+            vrf: GI 
+            neighbor_group: SB-IPV4-GROUP 
+            description: VRCNLV01_vrf_Gi 
+            af: ipv4
+            default_originate: true
+          - neighbor: fd00:976a:14f3:193f::5:b 
+            vrf: GI 
+            neighbor_group: SB-IPV6-GROUP 
+            description: VRCNLV01_vrf_GI-V6 
+            af: ipv6
+            default_originate: true
+            route_policy_out: RP_DEFAULT_OUT
+            route_policy_in: RP_DEFAULT_IN
+          - neighbor: fd00:976a:14f3:193f::2:b 
+            vrf: IPV6SUB 
+            neighbor_group: SB-IPV6-GROUP 
+            description: VRCNLV01_vrf_IPV6SUB 
+            af: ipv6
+            default_originate: true
+          - neighbor: 10.249.32.207 
+            vrf: NMNET 
+            description: VRCNLV01_vrf_NMNET 
+            af: ipv4
+            default_originate: true
+            route_policy_in: RP_NMNET_IN
+        static_route_list:
+          - route: 10.164.161.252/30
+            af: ipv4
+            interface: Bundle-Ether190.3
+            next_hop: 10.164.161.254
+          - route: fd00:976a:b69a:a1c1:186f:41f6:0:a/127
+            af: ipv6
+            vrf: default
+            interface: Bundle-Ether190.xx
+            next_hop: fd00:976a:b69a:a1c1:186f:41f6:0:b
+        phy_interface_list:
+          - interface: TenGigE0/1/0/1
+            type: TenGigE
+            id: 0/1/0/1
+            description: TBD_description_TenGigE0/1/0/1
+          - interface: TenGigE0/1/0/2
+            type: TenGigE
+            id: 0/1/0/2
+            description: TBD_description_TenGigE0/1/0/2
+          - interface: TenGigE0/1/0/3
+            type: TenGigE
+            id: 0/1/0/3
+            description: TBD_description_TenGigE0/1/0/3
+          - interface: TenGigE0/1/0/4
+            type: TenGigE
+            id: 0/1/0/4
+            description: TBD_description_TenGigE0/1/0/4
+    dsc_legacy_odd: 
+        hostname: dschou01
+        unit: bootflash
+        role: dsc
+        side: odd
+    dsc_legacy_even: 
+        hostname: dschou02
+        unit: bootflash
+        role: dsc
+        side: even
+    sb_odd: 
+        hostname: vrbhou01
+        unit: bootflash
+        role: sb
+        side: odd
+        lo0: 10.169.11.19
+        lo0_prefix_name: SB-IPV4-ASSIGNED-SPACE
+        lo0_prefix_name_2: SB-IPV4-ASSIGNED-SPACE-ONLY
+        lo0_prefix_id: 200
+        bgp_as: 65138
+        bgp_neighbor_drc: 10.177.115.226
+        bgp_neighbor_sb: 10.177.115.227
+        uplink_lacp:
+            po_id: 1
+            po_mtu: 9202
+            po_min_links: 2
+            po_new_description: 100G_BUNDLE_to_0162.010_DSCHOU11_Po616_CORENET
+            po_description: Po1_description_vrbhou01
+        po_subinterface_list:
+          - po_subinterface: port-channel1.2
+            new_description: 0162.007_DRCHOU51_BE651.106_VRF_NMNET_via_DSCHOU11_Po616
+            description: 1163.117_DRCHOU21_Po1.2_NMNET
+            dot1q: 2
+            new_dot1q: 106
+            vrf: NMNET
+            ipv4_address: 10.240.137.83/31
+            mtu: 9198
+          - po_subinterface: port-channel1.3
+            new_description: 0162.007_DRCHOU51_BE651.213_Default_via_DSCHOU11_Po616
+            description: 1163.117_DRCHOU21_Po1.3_IPv4_Default
+            dot1q: 3
+            new_dot1q: 213
+            ipv4_address: 10.177.115.165/31
+            mtu: 9198
+          - po_subinterface: port-channel1.4
+            new_description: 0162.007_DRCHOU51_BE651.407_VRF_GI_IPV4_via_DSCHOU11_Po616
+            description: 1163.117_DRCHOU21_Po1.4_METROE_E
+            dot1q: 4
+            new_dot1q: 407
+            vrf: GI
+            ipv4_address: 10.177.115.167/31
+            mtu: 9198
+          - po_subinterface: port-channel1.5
+            new_description: 0162.007_DRCHOU51_BE651.408_VRF_GI_IPV6_via_DSCHOU11_Po616
+            description: 1163.117_DRCHOU21_Po1.5_IPv4_GI
+            dot1q: 5
+            new_dot1q: 408
+            vrf: GI
+            ipv6_address: fd00:976a:c307:2859:97c8:7784:0:b/127
+            mtu: 9198
+          - po_subinterface: port-channel1.8
+            new_description: 0162.007_DRCHOU51_BE651.1206_VRF_IPV6SUB_via_DSCHOU11_Po616
+            description: 1163.117_DRCHOU21_Po1.7_ IPv6-GI
+            dot1q: 7
+            new_dot1q: 1206
+            vrf: IPV6SUB
+            ipv6_address: fd00:976a:c307:2859:97c8:7785:0:b/127
+            mtu: 9198
+        phy_interface_list:
+          - interface: Eth1/50
+            type: Eth
+            id: 1/50
+            description: 0163.111_DRCHOU21_Po1.2_NMNET
+            mtu: 9202
+        new_phy_interface_list:
+          - interface: Eth1/54
+            type: Eth
+            id: 1/54
+            description: 0162.010_DSCHOU11_E6-03
+            mtu: 9202
+          - interface: EthInventada
+            type: Eth
+            id: Inventada
+            description: Noexiste
+            mtu: 9202
+        bgp_neighbor_list:
+          - neighbor: 10.177.115.164
+            af: ipv4
+          - neighbor: 10.177.115.166
+            af: ipv4
+            vrf: GI
+          - neighbor: fd00:976a:c307:2859:97c8:7784:0:a
+            af: ipv6
+            vrf: GI
+          - neighbor: 10.240.137.82
+            af: ipv4
+            vrf: NMNET
+          - neighbor: fd00:976a:c307:2859:97c8:7785:0:a
+            af: ipv6
+            vrf: IPV6SUB
+    sb_even: 
+        hostname: vrbhou02
+        role: sb
+        side: even
+        unit: bootflash
+        lo0: 10.169.11.20
+        lo0_prefix_name: SB-IPV4-ASSIGNED-SPACE
+        lo0_prefix_name_2: SB-IPV4-ASSIGNED-SPACE-ONLY
+        lo0_prefix_id: 200
+        bgp_as: 65138
+        bgp_neighbor_drc: 10.177.115.232
+        bgp_neighbor_sb: 10.177.115.233
+        uplink_lacp:
+            po_id: 1
+            po_mtu: 9202
+            po_min_links: 2
+            po_new_description: NEWPo1_description_vrbhou02
+            po_description: Po1_description_vrbhou02
+        phy_interface_list:
+          - interface: Eth1/50
+            type: Eth
+            id: 1/50
+            description: 0163.222_DRCHOU22_Po1.2_NMNET
+            mtu: 9202
+        new_phy_interface_list:
+          - interface: Eth1/49
+            type: Eth
+            id: 1/49
+            description: 8163.222_DSCHOU12_Po619.2_NMNET
+            mtu: 9202
+        po_subinterface_list:
+          - po_subinterface: port-channel1.2
+            new_description: 1163.888_DRCHOU22_Po1.2_NMNET
+            description: 1163.888_DRCHOU22_Po1.2_NMNET
+            dot1q: 2
+            new_dot1q: 109
+            vrf: NMNET
+            ipv4_address: 20.240.137.104/31
+            mtu: 9198
+          - po_subinterface: port-channel1.3
+            new_description: 1163.888_DRCHOU22_Po1.3_IPv4_Default
+            description: 1163.888_DRCHOU22_Po1.3_IPv4_Default
+            dot1q: 3
+            new_dot1q: 216
+            ipv4_address: 20.177.115.226/31
+            mtu: 9198
+          - po_subinterface: port-channel1.4
+            new_description: 1163.888_DRCHOU22_Po1.4_METROE_E
+            description: 1163.888_DRCHOU22_Po1.4_METROE_E
+            dot1q: 4
+            new_dot1q: 305
+            vrf: METROE-E
+            ipv4_address: 20.177.115.228/31
+            mtu: 9198
+          - po_subinterface: port-channel1.5
+            new_description: 1163.888_DRCHOU22_Po1.5_IPv4_GI
+            description: 1163.888_DRCHOU22_Po1.5_IPv4_GI
+            dot1q: 5
+            new_dot1q: 411
+            vrf: Gi
+            ipv4_address: 20.177.115.230/31
+            mtu: 9198
+          - po_subinterface: port-channel1.7
+            new_description: 1163.888_DRCHOU22_Po1.7_ IPv6-GI
+            description: 1163.888_DRCHOU22_Po1.7_ IPv6-GI
+            dot1q: 7
+            new_dot1q: 412
+            vrf: Gi
+            ipv6_address: fd20:976a:c307:2859:97c8:77a3:0:a/127
+            mtu: 9198
+          - po_subinterface: port-channel1.8
+            new_description: 1163.888_DRCHOU22_Po1.8_IPV6SUB
+            description: 1163.888_DRCHOU22_Po1.8_IPV6SUB
+            dot1q: 8
+            new_dot1q: 1209
+            vrf: IPV6SUB
+            ipv6_address: fd20:976a:c307:2859:97c8:77a4:0:a/127
+            mtu: 9198
+        bgp_neighbor_list:
+          - neighbor: 10.177.115.168
+            af: ipv4
+          - neighbor: 10.177.115.170
+            vrf: GI 
+            af: ipv4
+          - neighbor: fd00:976a:c307:2859:97c8:7786:0:a
+            vrf: GI 
+            af: ipv6
+          - neighbor: 10.240.137.84
+            vrf: NMNET 
+            af: ipv4
+          - neighbor: fd00:976a:c307:2859:97c8:7787:0:a
+            vrf: IPV6SUB 
+            af: ipv6
+    drc_odd:
+        hostname: drchou51
+        role: drc
+        side: odd
+        unit: disk0
+        be_id: 651
+        bgp_as: 65137 
+        bundle_subinterface_list:
+          - bundle_subinterface: Bundle-Ether651.109
+            description: 0163.07_VRBHOU01_Po1.2_NMNET
+            dot1q: 109
+            vrf: NMNET
+            ipv4_address: 10.240.137.104/31
+          - bundle_subinterface: Bundle-Ether651.216
+            description: 0163.07_VRBHOU01_Po1.3_IPv4_Default
+            dot1q: 216
+            ipv4_address: 10.177.115.226/31
+          - bundle_subinterface: Bundle-Ether651.305
+            description: 0163.07_VRBHOU01_Po1.4_METROE_E
+            dot1q: 305
+            vrf: METROE-E
+            ipv4_address: 10.177.115.228/31
+          - bundle_subinterface: Bundle-Ether651.411
+            description: 0163.07_VRBHOU01_Po1.5_IPv4_GI
+            dot1q: 411
+            vrf: GI
+            ipv4_address: 10.177.115.230/31
+          - bundle_subinterface: Bundle-Ether651.412
+            description: 0163.07_VRBHOU01_Po1.7_ IPv6-GI
+            dot1q: 412
+            vrf: GI
+            ipv6_address: fd00:976a:c307:2859:97c8:77a3:0:a/127
+          - bundle_subinterface: Bundle-Ether651.1209
+            description: 0163.07_VRBHOU01_Po1.8_IPV6SUB
+            dot1q: 1209
+            vrf: IPV6SUB
+            ipv6_address: fd00:976a:c307:2859:97c8:77a4:0:a/127
+        bgp_neighbor_list:
+          - neighbor: 10.166.112.83 
+            neighbor_group: SB-IPV4-GROUP
+            description: VRCNLV01_IPv4_Global 
+            af: ipv4
+            default_originate: true
+          - neighbor: 10.166.112.87
+            remote_as: 65138
+            neighbor_group: SB-IPV4-GROUP 
+            vrf: METROE-E 
+            description: VRCPTL01_VRF_METROE-E 
+            af: ipv4
+            default_originate: true
+            route_policy_out: RP_METROE-E_OUT
+          - neighbor: 10.166.112.91
+            password: 3ncr1p73d
+            vrf: GI 
+            neighbor_group: SB-IPV4-GROUP 
+            description: VRCNLV01_vrf_Gi 
+            af: ipv4
+            default_originate: true
+          - neighbor: fd00:976a:14f3:193f::5:b 
+            vrf: GI
+            neighbor_group: SB-IPV6-GROUP 
+            description: VRCNLV01_vrf_GI-V6 
+            af: ipv6
+            default_originate: true
+            route_policy_out: RP_DEFAULT_OUT
+            route_policy_in: RP_DEFAULT_IN
+          - neighbor: fd00:976a:14f3:193f::2:b 
+            vrf: IPV6SUB 
+            neighbor_group: SB-IPV6-GROUP 
+            description: VRCNLV01_vrf_IPV6SUB 
+            af: ipv6
+            default_originate: true
+          - neighbor: 10.249.32.207 
+            vrf: NMNET 
+            description: VRCNLV01_vrf_NMNET 
+            af: ipv4
+            default_originate: true
+            route_policy_in: RP_NMNET_IN
+        static_route_list:
+          - route: 10.164.161.252/30
+            af: ipv4
+            interface: Bundle-Ether651.206
+            next_hop: 10.164.161.254
+          - route: fd00:976a:b69a:a1c1:186f:41f6:0:a/127
+            af: ipv6
+            vrf: default
+            interface: Bundle-Ether651.1202
+            next_hop: fd00:976a:b69a:a1c1:186f:41f6:0:b
+    drc_even:
+        hostname: drchou52
+        role: drc
+        side: even
+        unit: disk0
+        be_id: 651
+        bgp_as: 65137 
+        bundle_subinterface_list:
+          - bundle_subinterface: Bundle-Ether651.109
+            description: 0163.08_VRBHOU02_Po1.2_NMNET
+            dot1q: 109
+            vrf: NMNET
+            ipv4_address: 10.240.137.108/31
+          - bundle_subinterface: Bundle-Ether651.216
+            description: 0163.08_VRBHOU02_Po1.3_IPv4_Default
+            dot1q: 216
+            ipv4_address: 10.177.115.230/31
+          - bundle_subinterface: Bundle-Ether651.305
+            description: 0163.08_VRBHOU02_Po1.4_METROE_E
+            dot1q: 305
+            vrf: METROE-E
+            ipv4_address: 10.177.115.232/31
+          - bundle_subinterface: Bundle-Ether651.411
+            description: 0163.08_VRBHOU02_Po1.5_IPv4_GI
+            dot1q: 411
+            vrf: GI
+            ipv4_address: 10.177.115.234/31
+          - bundle_subinterface: Bundle-Ether651.412
+            description: 0163.08_VRBHOU02_Po1.7_ IPv6-GI
+            dot1q: 412
+            vrf: GI
+            ipv6_address: fd00:976a:c307:2859:97c8:7a5:0:a/127
+          - bundle_subinterface: Bundle-Ether651.1209
+            description: 0163.08_VRBHOU02_Po1.8_IPV6SUB
+            dot1q: 1209
+            vrf: IPV6SUB
+            ipv6_address: fd00:976a:c307:2859:97c8:77a6:0:a/127
+        bgp_neighbor_list:
+          - neighbor: 10.166.112.83 
+            neighbor_group: SB-IPV4-GROUP
+            description: VRCNLV01_IPv4_Global 
+            af: ipv4
+            default_originate: true
+          - neighbor: 10.166.112.87
+            remote_as: 65138
+            neighbor_group: SB-IPV4-GROUP 
+            vrf: METROE-E 
+            description: VRCPTL01_VRF_METROE-E 
+            af: ipv4
+            default_originate: true
+            route_policy_out: RP_METROE-E_OUT
+          - neighbor: 10.166.112.91
+            password: 3ncr1p73d
+            vrf: GI 
+            neighbor_group: SB-IPV4-GROUP 
+            description: VRCNLV01_vrf_Gi 
+            af: ipv4
+            default_originate: true
+          - neighbor: fd00:976a:14f3:193f::5:b 
+            vrf: GI
+            neighbor_group: SB-IPV6-GROUP 
+            description: VRCNLV01_vrf_GI-V6 
+            af: ipv6
+            default_originate: true
+            route_policy_out: RP_DEFAULT_OUT
+            route_policy_in: RP_DEFAULT_IN
+          - neighbor: fd00:976a:14f3:193f::2:b 
+            vrf: IPV6SUB 
+            neighbor_group: SB-IPV6-GROUP 
+            description: VRCNLV01_vrf_IPV6SUB 
+            af: ipv6
+            default_originate: true
+          - neighbor: 10.249.32.207 
+            vrf: NMNET 
+            description: VRCNLV01_vrf_NMNET 
+            af: ipv4
+            default_originate: true
+            route_policy_in: RP_NMNET_IN
+    dsc_odd:
+        hostname: dschou11
+        model: N7K-C7010
+        role: dsc
+        side: odd
+        unit: bootflash
+        drc_po_id: 651
+        sb_po_id: 616
+        sb_po_description: 100G_BUNDLE_TO_0162.11_VRBHOU01_Po1
+        sb_po_bw: 100
+        sb_po_mtu: 9216
+        vlan_set: 109,216,305,411,412,1209
+        vlan_list:
+          - vlan: 109
+            name: DRCHOU51_NMNET_VRF_10.240.137.104/31
+          - vlan: 216
+            name: DRCHOU51_Default_10.177.115.226/31
+          - vlan: 305
+            name: DRCHOU51_IPv6_METROE-E_10.177.115.228/31
+          - vlan: 411
+            name: DRCHOU51_GI_VRF_10.177.115.230/31
+          - vlan: 412
+            name: DRCHOU51_IPv6_GI_VRF_fd00:976a:c307:2859:97c8:77a3:0:a/127
+          - vlan: 1209
+            name: DRCHOU51_IPv6_IPV6SUB_VRF_fd00:976a:c307:2859:97c8:77a4:0:a/127
+        phy_interface_list:
+          - interface: Eth6/3
+            type: Eth
+            id: 6/3
+            description: 0162.11_VRBHOU01_Eth1/53
+            mtu: 9216
+    dsc_even:
+        hostname: dschou12
+        model: N3K-3408
+        unit: bootflash
+        role: dsc
+        side: even
+        drc_po_id: 651
+        sb_po_id: 616
+        sb_po_description: 100G_BUNDLE_TO_0162.13_VRBHOU02_Po1
+        sb_po_bw: 100
+        sb_po_mtu: 9216
+        vlan_set: 109,216,305,411,412,1209
+        vlan_list:
+          - vlan: 109
+            name: DRCHOU52_NMNET_VRF_10.240.137.108/31
+          - vlan: 216
+            name: DRCHOU52_Default_10.177.115.230/31
+          - vlan: 305
+            name: DRCHOU52_IPv6_METROE-E_10.177.115.232/31
+          - vlan: 411
+            name: DRCHOU52_GI_VRF_10.177.115.234/31
+          - vlan: 412
+            name: DRCHOU52_IPv6_GI_VRF_fd00:976a:c307:2859:97c8:77a5:0:a/127
+          - vlan: 1209
+            name: DRCHOU52_IPv6_IPV6SUB_VRF_fd00:976a:c307:2859:97c8:77a6:0:a/127
+        phy_interface_list:
+          - interface: Eth6/3
+            type: Eth
+            id: 6/3
+            description: 0162.13_VRBHOU01_Eth1/53
+            mtu: 9216
+VRS:
+    use_legacy_dsc: no
+    cr: CR1234567
+    drc_legacy_odd: 
+        hostname: drchou21
+        role: drc
+        side: odd
+        unit: disk0
+        bgp_as: 65137 
+        be_id: 221
+        be_min_links: 2
+        bundle_subinterface_list:
+          - bundle_subinterface: Bundle-Ether221.2
+            description: 0163.07_VRSHOU01_Po1.2_NMNET
+            dot1q: 2
+            vrf: NMNET
+            ipv4_address: 10.240.137.104/31
+          - bundle_subinterface: Bundle-Ether221.3
+            description: 0163.07_VRSHOU01_Po1.3_IPv4_Default
+            dot1q: 3
+            ipv4_address: 10.177.115.226/31
+          - bundle_subinterface: Bundle-Ether221.4
+            description: 0163.07_VRSHOU01_Po1.4_METROE_E
+            dot1q: 4
+            vrf: METROE-E
+            ipv4_address: 10.177.115.228/31
+          - bundle_subinterface: Bundle-Ether221.5
+            description: 0163.07_VRSHOU01_Po1.5_IPv4_GI
+            dot1q: 5
+            vrf: Gi
+            ipv4_address: 10.177.115.230/31
+          - bundle_subinterface: Bundle-Ether221.7
+            description: 0163.07_VRSHOU01_Po1.7_ IPv6-GI
+            dot1q: 7
+            vrf: Gi
+            ipv6_address: fd00:976a:c307:2859:97c8:77a3:0:a/127
+          - bundle_subinterface: Bundle-Ether221.8
+            description: 0163.07_VRSHOU01_Po1.8_IPV6SUB
+            dot1q: 8
+            vrf: IPV6SUB
+            ipv6_address: fd00:976a:c307:2859:97c8:77a4:0:a/127
+        bgp_neighbor_list:
+          - neighbor: 10.166.112.83 
+            neighbor_group: SB-IPV4-GROUP
+            description: VRCNLV01_IPv4_Global 
+            af: ipv4
+            default_originate: true
+          - neighbor: 10.166.112.87
+            remote_as: 65138
+            neighbor_group: SB-IPV4-GROUP 
+            vrf: METROE-E 
+            description: VRCPTL01_VRF_METROE-E 
+            af: ipv4
+            default_originate: true
+            route_policy_out: RP_METROE-E_OUT
+          - neighbor: 10.166.112.91
+            password: 3ncr1p73d
+            vrf: GI 
+            neighbor_group: SB-IPV4-GROUP 
+            description: VRCNLV01_vrf_Gi 
+            af: ipv4
+            default_originate: true
+          - neighbor: fd00:976a:14f3:193f::5:b 
+            vrf: GI
+            neighbor_group: SB-IPV6-GROUP 
+            description: VRCNLV01_vrf_GI-V6 
+            af: ipv6
+            default_originate: true
+            route_policy_out: RP_DEFAULT_OUT
+            route_policy_in: RP_DEFAULT_IN
+          - neighbor: fd00:976a:14f3:193f::2:b 
+            vrf: IPV6SUB 
+            neighbor_group: SB-IPV6-GROUP 
+            description: VRCNLV01_vrf_IPV6SUB 
+            af: ipv6
+            default_originate: true
+          - neighbor: 10.249.32.207 
+            vrf: NMNET 
+            description: VRCNLV01_vrf_NMNET 
+            af: ipv4
+            default_originate: true
+            route_policy_in: RP_NMNET_IN
+        static_route_list:
+          - route: 10.164.161.252/30
+            af: ipv4
+            interface: Bundle-Ether221.3
+            next_hop: 10.164.161.254
+          - route: fd00:976a:b69a:a1c1:186f:41f6:0:a/127
+            af: ipv6
+            vrf: default
+            interface: Bundle-Ether221.xx
+            next_hop: fd00:976a:b69a:a1c1:186f:41f6:0:b
+        phy_interface_list:
+          - interface: TenGigE0/1/0/4/1
+            type: TenGigE
+            id: 0/1/0/4/1
+            description: TBD_description_TenGigE0/1/0/4/1
+          - interface: TenGigE0/1/0/4/2
+            type: TenGigE
+            id: 0/1/0/4/2
+            description: TBD_description_TenGigE0/1/0/4/2
+          - interface: TenGigE0/1/0/4/3
+            type: TenGigE
+            id: 0/1/0/4/3
+            description: TBD_description_TenGigE0/1/0/4/3
+          - interface: TenGigE0/1/0/4/4
+            type: TenGigE
+            id: 0/1/0/4/4
+            description: TBD_description_TenGigE0/1/0/4/4
+    drc_legacy_even:
+        hostname: drchou22
+        role: drc
+        side: even
+        unit: disk0
+        bgp_as: 65137 
+        be_id: 221
+        be_min_links: 2
+        bundle_subinterface_list:
+          - bundle_subinterface: Bundle-Ether221.2
+            description: 0163.07_VRSHOU01_Po1.2_NMNET
+            dot1q: 2
+            vrf: NMNET
+            ipv4_address: 10.240.137.104/31
+          - bundle_subinterface: Bundle-Ether221.3
+            description: 0163.07_VRSHOU01_Po1.3_IPv4_Default
+            dot1q: 3
+            ipv4_address: 10.177.115.226/31
+          - bundle_subinterface: Bundle-Ether221.4
+            description: 0163.07_VRSHOU01_Po1.4_METROE_E
+            dot1q: 4
+            vrf: METROE-E
+            ipv4_address: 10.177.115.228/31
+          - bundle_subinterface: Bundle-Ether221.5
+            description: 0163.07_VRSHOU01_Po1.5_IPv4_GI
+            dot1q: 5
+            vrf: Gi
+            ipv4_address: 10.177.115.230/31
+          - bundle_subinterface: Bundle-Ether221.7
+            description: 0163.07_VRSHOU01_Po1.7_ IPv6-GI
+            dot1q: 7
+            vrf: Gi
+            ipv6_address: fd00:976a:c307:2859:97c8:77a3:0:a/127
+          - bundle_subinterface: Bundle-Ether221.8
+            description: 0163.07_VRSHOU01_Po1.8_IPV6SUB
+            dot1q: 8
+            vrf: IPV6SUB
+            ipv6_address: fd00:976a:c307:2859:97c8:77a4:0:a/127
+        bgp_neighbor_list:
+          - neighbor: 10.166.112.83 
+            neighbor_group: SB-IPV4-GROUP
+            description: VRCNLV01_IPv4_Global 
+            af: ipv4
+            default_originate: true
+          - neighbor: 10.166.112.87
+            remote_as: 65138
+            neighbor_group: SB-IPV4-GROUP 
+            vrf: METROE-E 
+            description: VRCPTL01_VRF_METROE-E 
+            af: ipv4
+            default_originate: true
+            route_policy_out: RP_METROE-E_OUT
+          - neighbor: 10.166.112.91
+            password: 3ncr1p73d
+            vrf: GI 
+            neighbor_group: SB-IPV4-GROUP 
+            description: VRCNLV01_vrf_Gi 
+            af: ipv4
+            default_originate: true
+          - neighbor: fd00:976a:14f3:193f::5:b 
+            vrf: GI 
+            neighbor_group: SB-IPV6-GROUP 
+            description: VRCNLV01_vrf_GI-V6 
+            af: ipv6
+            default_originate: true
+            route_policy_out: RP_DEFAULT_OUT
+            route_policy_in: RP_DEFAULT_IN
+          - neighbor: fd00:976a:14f3:193f::2:b 
+            vrf: IPV6SUB 
+            neighbor_group: SB-IPV6-GROUP 
+            description: VRCNLV01_vrf_IPV6SUB 
+            af: ipv6
+            default_originate: true
+          - neighbor: 10.249.32.207 
+            vrf: NMNET 
+            description: VRCNLV01_vrf_NMNET 
+            af: ipv4
+            default_originate: true
+            route_policy_in: RP_NMNET_IN
+        static_route_list:
+          - route: 10.164.161.252/30
+            af: ipv4
+            interface: Bundle-Ether221.3
+            next_hop: 10.164.161.254
+          - route: fd00:976a:b69a:a1c1:186f:41f6:0:a/127
+            af: ipv6
+            vrf: default
+            interface: Bundle-Ether221.xx
+            next_hop: fd00:976a:b69a:a1c1:186f:41f6:0:b
+        phy_interface_list:
+          - interface: TenGigE0/1/0/4/1
+            type: TenGigE
+            id: 0/1/0/4/1
+            description: TBD_description_TenGigE0/1/0/4/1
+          - interface: TenGigE0/1/0/4/2
+            type: TenGigE
+            id: 0/1/0/4/2
+            description: TBD_description_TenGigE0/1/0/4/2
+          - interface: TenGigE0/1/0/4/3
+            type: TenGigE
+            id: 0/1/0/4/3
+            description: TBD_description_TenGigE0/1/0/4/3
+          - interface: TenGigE0/1/0/4/4
+            type: TenGigE
+            id: 0/1/0/4/4
+            description: TBD_description_TenGigE0/1/0/4/4
+    dsc_legacy_odd: 
+        hostname: dschou01
+        unit: bootflash
+        role: dsc
+        side: odd
+    dsc_legacy_even: 
+        hostname: dschou02
+        unit: bootflash
+        role: dsc
+        side: even
+    sb_odd: 
+        hostname: vrshou01
+        unit: bootflash
+        role: sb
+        side: odd
+        lo0: 10.169.11.19
+        lo0_prefix_name: SB-IPV4-ASSIGNED-SPACE
+        lo0_prefix_name_2: SB-IPV4-ASSIGNED-SPACE-ONLY
+        lo0_prefix_id: 200
+        bgp_as: 65138
+        bgp_neighbor_drc: 10.177.115.226
+        bgp_neighbor_sb: 10.177.115.227
+        uplink_lacp:
+            po_id: 1
+            po_mtu: 9202
+            po_min_links: 2
+            po_new_description: NEWPo1_description_vrshou01
+            po_description: Po1_description_vrshou01
+        po_subinterface_list:
+          - po_subinterface: port-channel1.2
+            description: 1163.117_DRCHOU21_Po1.2_NMNET
+            new_description: 1163.117_DRCHOU21_Po1.2_NMNET
+            dot1q: 2
+            new_dot1q: 109
+            vrf: NMNET
+            ipv4_address: 10.240.137.104/31
+            mtu: 9198
+          - po_subinterface: port-channel1.3
+            new_description: 1163.117_DRCHOU21_Po1.3_IPv4_Default
+            description: 1163.117_DRCHOU21_Po1.3_IPv4_Default
+            dot1q: 3
+            new_dot1q: 216
+            ipv4_address: 10.177.115.226/31
+            mtu: 9198
+          - po_subinterface: port-channel1.4
+            new_description: 1163.117_DRCHOU21_Po1.4_METROE_E
+            description: 1163.117_DRCHOU21_Po1.4_METROE_E
+            dot1q: 4
+            new_dot1q: 305
+            vrf: METROE-E
+            ipv4_address: 10.177.115.228/31
+            mtu: 9198
+          - po_subinterface: port-channel1.5
+            new_description: 1163.117_DRCHOU21_Po1.5_IPv4_GI
+            description: 1163.117_DRCHOU21_Po1.5_IPv4_GI
+            dot1q: 5
+            new_dot1q: 411
+            vrf: Gi
+            ipv4_address: 10.177.115.230/31
+            mtu: 9198
+          - po_subinterface: port-channel1.7
+            new_description: 1163.117_DRCHOU21_Po1.7_ IPv6-GI
+            description: 1163.117_DRCHOU21_Po1.7_ IPv6-GI
+            dot1q: 7
+            new_dot1q: 412
+            vrf: Gi
+            ipv6_address: fd00:976a:c307:2859:97c8:77a3:0:a/127
+            mtu: 9198
+          - po_subinterface: port-channel1.8
+            new_description: 1163.117_DRCHOU21_Po1.8_IPV6SUB
+            description: 1163.117_DRCHOU21_Po1.8_IPV6SUB
+            dot1q: 8
+            new_dot1q: 1209
+            vrf: IPV6SUB
+            ipv6_address: fd00:976a:c307:2859:97c8:77a4:0:a/127
+            mtu: 9198
+        phy_interface_list:
+          - interface: Eth1/54
+            type: Eth
+            id: 1/54
+            description: 0163.111_DRCHOU21_Po1.2_NMNET
+            mtu: 9202
+        new_phy_interface_list:
+          - interface: Eth1/53
+            type: Eth
+            id: 1/53
+            description: 5163.111_DSCHOU11_Po600.2_NMNET
+            mtu: 9202
+        bgp_neighbor_list:
+          - neighbor: 10.177.115.164
+            af: ipv4
+          - neighbor: 10.177.115.166
+            af: ipv4
+            vrf: GI
+          - neighbor: fd00:976a:c307:2859:97c8:7784:0:a
+            af: ipv6
+            vrf: GI
+          - neighbor: 10.240.137.82
+            af: ipv4
+            vrf: NMNET
+          - neighbor: fd00:976a:c307:2859:97c8:7785:0:a
+            af: ipv6
+            vrf: IPV6SUB
+    sb_even: 
+        hostname: vrshou02
+        role: sb
+        side: even
+        unit: bootflash
+        lo0: 10.169.11.20
+        lo0_prefix_name: SB-IPV4-ASSIGNED-SPACE
+        lo0_prefix_name_2: SB-IPV4-ASSIGNED-SPACE-ONLY
+        lo0_prefix_id: 200
+        bgp_as: 65138
+        bgp_neighbor_drc: 10.177.115.232
+        bgp_neighbor_sb: 10.177.115.233
+        uplink_lacp:
+            po_id: 1
+            po_mtu: 9202
+            po_min_links: 2
+            po_new_description: NEWPo1_description_vrshou02
+            po_description: Po1_description_vrshou02
+        phy_interface_list:
+          - interface: Eth1/54
+            type: Eth
+            id: 1/54
+            description: 0163.222_DRCHOU22_Po1.2_NMNET
+            mtu: 9202
+        new_phy_interface_list:
+          - interface: Eth1/53
+            type: Eth
+            id: 1/53
+            description: 8163.222_DSCHOU12_Po619.2_NMNET
+            mtu: 9202
+        po_subinterface_list:
+          - po_subinterface: port-channel1.2
+            description: 1163.888_DRCHOU22_Po1.2_NMNET
+            new_description: 1163.888_DRCHOU22_Po1.2_NMNET
+            dot1q: 2
+            new_dot1q: 109
+            vrf: NMNET
+            ipv4_address: 20.240.137.104/31
+            mtu: 9198
+          - po_subinterface: port-channel1.3
+            description: 1163.888_DRCHOU22_Po1.3_IPv4_Default
+            new_description: 1163.888_DRCHOU22_Po1.3_IPv4_Default
+            dot1q: 3
+            new_dot1q: 216
+            ipv4_address: 20.177.115.226/31
+            mtu: 9198
+          - po_subinterface: port-channel1.4
+            description: 1163.888_DRCHOU22_Po1.4_METROE_E
+            new_description: 1163.888_DRCHOU22_Po1.4_METROE_E
+            dot1q: 4
+            new_dot1q: 305
+            vrf: METROE-E
+            ipv4_address: 20.177.115.228/31
+            mtu: 9198
+          - po_subinterface: port-channel1.5
+            description: 1163.888_DRCHOU22_Po1.5_IPv4_GI
+            new_description: 1163.888_DRCHOU22_Po1.5_IPv4_GI
+            dot1q: 5
+            new_dot1q: 411
+            vrf: Gi
+            ipv4_address: 20.177.115.230/31
+            mtu: 9198
+          - po_subinterface: port-channel1.7
+            description: 1163.888_DRCHOU22_Po1.7_ IPv6-GI
+            new_description: 1163.888_DRCHOU22_Po1.7_ IPv6-GI
+            dot1q: 7
+            new_dot1q: 412
+            vrf: Gi
+            ipv6_address: fd20:976a:c307:2859:97c8:77a3:0:a/127
+            mtu: 9198
+          - po_subinterface: port-channel1.8
+            description: 1163.888_DRCHOU22_Po1.8_IPV6SUB
+            new_description: 1163.888_DRCHOU22_Po1.8_IPV6SUB
+            dot1q: 8
+            new_dot1q: 1209
+            vrf: IPV6SUB
+            ipv6_address: fd20:976a:c307:2859:97c8:77a4:0:a/127
+            mtu: 9198
+        bgp_neighbor_list:
+          - neighbor: 10.177.115.168
+            af: ipv4
+          - neighbor: 10.177.115.170
+            vrf: GI 
+            af: ipv4
+          - neighbor: fd00:976a:c307:2859:97c8:7786:0:a
+            vrf: GI 
+            af: ipv6
+          - neighbor: 10.240.137.84
+            vrf: NMNET 
+            af: ipv4
+          - neighbor: fd00:976a:c307:2859:97c8:7787:0:a
+            vrf: IPV6SUB 
+            af: ipv6
+    drc_odd:
+        hostname: drchou51
+        role: drc
+        side: odd
+        unit: disk0
+        be_id: 651
+        bgp_as: 65137 
+        bundle_subinterface_list:
+          - bundle_subinterface: Bundle-Ether651.109
+            description: 0163.07_VRSHOU01_Po1.2_NMNET
+            dot1q: 109
+            vrf: NMNET
+            ipv4_address: 10.240.137.104/31
+          - bundle_subinterface: Bundle-Ether651.216
+            description: 0163.07_VRSHOU01_Po1.3_IPv4_Default
+            dot1q: 216
+            ipv4_address: 10.177.115.226/31
+          - bundle_subinterface: Bundle-Ether651.305
+            description: 0163.07_VRSHOU01_Po1.4_METROE_E
+            dot1q: 305
+            vrf: METROE-E
+            ipv4_address: 10.177.115.228/31
+          - bundle_subinterface: Bundle-Ether651.411
+            description: 0163.07_VRSHOU01_Po1.5_IPv4_GI
+            dot1q: 411
+            vrf: GI
+            ipv4_address: 10.177.115.230/31
+          - bundle_subinterface: Bundle-Ether651.412
+            description: 0163.07_VRSHOU01_Po1.7_ IPv6-GI
+            dot1q: 412
+            vrf: GI
+            ipv6_address: fd00:976a:c307:2859:97c8:77a3:0:a/127
+          - bundle_subinterface: Bundle-Ether651.1209
+            description: 0163.07_VRSHOU01_Po1.8_IPV6SUB
+            dot1q: 1209
+            vrf: IPV6SUB
+            ipv6_address: fd00:976a:c307:2859:97c8:77a4:0:a/127
+        bgp_neighbor_list:
+          - neighbor: 10.166.112.83 
+            neighbor_group: SB-IPV4-GROUP
+            description: VRCNLV01_IPv4_Global 
+            af: ipv4
+            default_originate: true
+          - neighbor: 10.166.112.87
+            remote_as: 65138
+            neighbor_group: SB-IPV4-GROUP 
+            vrf: METROE-E 
+            description: VRCPTL01_VRF_METROE-E 
+            af: ipv4
+            default_originate: true
+            route_policy_out: RP_METROE-E_OUT
+          - neighbor: 10.166.112.91
+            password: 3ncr1p73d
+            vrf: GI 
+            neighbor_group: SB-IPV4-GROUP 
+            description: VRCNLV01_vrf_Gi 
+            af: ipv4
+            default_originate: true
+          - neighbor: fd00:976a:14f3:193f::5:b 
+            vrf: GI
+            neighbor_group: SB-IPV6-GROUP 
+            description: VRCNLV01_vrf_GI-V6 
+            af: ipv6
+            default_originate: true
+            route_policy_out: RP_DEFAULT_OUT
+            route_policy_in: RP_DEFAULT_IN
+          - neighbor: fd00:976a:14f3:193f::2:b 
+            vrf: IPV6SUB 
+            neighbor_group: SB-IPV6-GROUP 
+            description: VRCNLV01_vrf_IPV6SUB 
+            af: ipv6
+            default_originate: true
+          - neighbor: 10.249.32.207 
+            vrf: NMNET 
+            description: VRCNLV01_vrf_NMNET 
+            af: ipv4
+            default_originate: true
+            route_policy_in: RP_NMNET_IN
+        static_route_list:
+          - route: 10.164.161.252/30
+            af: ipv4
+            interface: Bundle-Ether651.206
+            next_hop: 10.164.161.254
+          - route: fd00:976a:b69a:a1c1:186f:41f6:0:a/127
+            af: ipv6
+            vrf: default
+            interface: Bundle-Ether651.1202
+            next_hop: fd00:976a:b69a:a1c1:186f:41f6:0:b
+    drc_even:
+        hostname: drchou52
+        role: drc
+        side: even
+        unit: disk0
+        be_id: 651
+        bgp_as: 65137 
+        bundle_subinterface_list:
+          - bundle_subinterface: Bundle-Ether651.109
+            description: 0163.08_VRSHOU02_Po1.2_NMNET
+            dot1q: 109
+            vrf: NMNET
+            ipv4_address: 10.240.137.108/31
+          - bundle_subinterface: Bundle-Ether651.216
+            description: 0163.08_VRSHOU02_Po1.3_IPv4_Default
+            dot1q: 216
+            ipv4_address: 10.177.115.230/31
+          - bundle_subinterface: Bundle-Ether651.305
+            description: 0163.08_VRSHOU02_Po1.4_METROE_E
+            dot1q: 305
+            vrf: METROE-E
+            ipv4_address: 10.177.115.232/31
+          - bundle_subinterface: Bundle-Ether651.411
+            description: 0163.08_VRSHOU02_Po1.5_IPv4_GI
+            dot1q: 411
+            vrf: GI
+            ipv4_address: 10.177.115.234/31
+          - bundle_subinterface: Bundle-Ether651.412
+            description: 0163.08_VRSHOU02_Po1.7_ IPv6-GI
+            dot1q: 412
+            vrf: GI
+            ipv6_address: fd00:976a:c307:2859:97c8:7a5:0:a/127
+          - bundle_subinterface: Bundle-Ether651.1209
+            description: 0163.08_VRSHOU02_Po1.8_IPV6SUB
+            dot1q: 1209
+            vrf: IPV6SUB
+            ipv6_address: fd00:976a:c307:2859:97c8:77a6:0:a/127
+        bgp_neighbor_list:
+          - neighbor: 10.166.112.83 
+            neighbor_group: SB-IPV4-GROUP
+            description: VRCNLV01_IPv4_Global 
+            af: ipv4
+            default_originate: true
+          - neighbor: 10.166.112.87
+            remote_as: 65138
+            neighbor_group: SB-IPV4-GROUP 
+            vrf: METROE-E 
+            description: VRCPTL01_VRF_METROE-E 
+            af: ipv4
+            default_originate: true
+            route_policy_out: RP_METROE-E_OUT
+          - neighbor: 10.166.112.91
+            password: 3ncr1p73d
+            vrf: GI 
+            neighbor_group: SB-IPV4-GROUP 
+            description: VRCNLV01_vrf_Gi 
+            af: ipv4
+            default_originate: true
+          - neighbor: fd00:976a:14f3:193f::5:b 
+            vrf: GI
+            neighbor_group: SB-IPV6-GROUP 
+            description: VRCNLV01_vrf_GI-V6 
+            af: ipv6
+            default_originate: true
+            route_policy_out: RP_DEFAULT_OUT
+            route_policy_in: RP_DEFAULT_IN
+          - neighbor: fd00:976a:14f3:193f::2:b 
+            vrf: IPV6SUB 
+            neighbor_group: SB-IPV6-GROUP 
+            description: VRCNLV01_vrf_IPV6SUB 
+            af: ipv6
+            default_originate: true
+          - neighbor: 10.249.32.207 
+            vrf: NMNET 
+            description: VRCNLV01_vrf_NMNET 
+            af: ipv4
+            default_originate: true
+            route_policy_in: RP_NMNET_IN
+    dsc_odd:
+        hostname: dschou11
+        model: N7K-C7010
+        role: dsc
+        side: odd
+        unit: bootflash
+        drc_po_id: 651
+        sb_po_id: 620
+        sb_po_description: 100G_BUNDLE_TO_0162.11_VRSHOU01_Po1
+        sb_po_bw: 100
+        sb_po_mtu: 9216
+        vlan_set: 109,216,305,411,412,1209
+        vlan_list:
+          - vlan: 109
+            name: DRCHOU51_NMNET_VRF_10.240.137.104/31
+          - vlan: 216
+            name: DRCHOU51_Default_10.177.115.226/31
+          - vlan: 305
+            name: DRCHOU51_IPv6_METROE-E_10.177.115.228/31
+          - vlan: 411
+            name: DRCHOU51_GI_VRF_10.177.115.230/31
+          - vlan: 412
+            name: DRCHOU51_IPv6_GI_VRF_fd00:976a:c307:2859:97c8:77a3:0:a/127
+          - vlan: 1209
+            name: DRCHOU51_IPv6_IPV6SUB_VRF_fd00:976a:c307:2859:97c8:77a4:0:a/127
+        phy_interface_list:
+          - interface: Eth6/5
+            type: Eth
+            id: 6/5
+            description: 0162.11_VRSHOU01_Eth1/53
+            mtu: 9216
+    dsc_even:
+        hostname: dschou12
+        model: N3K-3408
+        unit: bootflash
+        role: dsc
+        side: even
+        drc_po_id: 651
+        sb_po_id: 619
+        sb_po_description: 100G_BUNDLE_TO_0162.13_VRSHOU02_Po1
+        sb_po_bw: 100
+        sb_po_mtu: 9216
+        vlan_set: 109,216,305,411,412,1209
+        vlan_list:
+          - vlan: 109
+            name: DRCHOU52_NMNET_VRF_10.240.137.108/31
+          - vlan: 216
+            name: DRCHOU52_Default_10.177.115.230/31
+          - vlan: 305
+            name: DRCHOU52_IPv6_METROE-E_10.177.115.232/31
+          - vlan: 411
+            name: DRCHOU52_GI_VRF_10.177.115.234/31
+          - vlan: 412
+            name: DRCHOU52_IPv6_GI_VRF_fd00:976a:c307:2859:97c8:77a5:0:a/127
+          - vlan: 1209
+            name: DRCHOU52_IPv6_IPV6SUB_VRF_fd00:976a:c307:2859:97c8:77a6:0:a/127
+        phy_interface_list:
+          - interface: Eth6/5
+            type: Eth
+            id: 6/5
+            description: 0162.13_VRSHOU01_Eth1/53
+            mtu: 9216

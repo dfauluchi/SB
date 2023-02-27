@@ -1,0 +1,55 @@
+
+!
+! DSCHOU12 VLAN configurations !
+!
+vlan 109
+  name DRCHOU52_NMNET_VRF_10.240.137.108/31
+exit
+!
+vlan 216
+  name DRCHOU52_Default_10.177.115.230/31
+exit
+!
+vlan 305
+  name DRCHOU52_IPv6_METROE-E_10.177.115.232/31
+exit
+!
+vlan 411
+  name DRCHOU52_GI_VRF_10.177.115.234/31
+exit
+!
+vlan 412
+  name DRCHOU52_IPv6_GI_VRF_fd00:976a:c307:2859:97c8:77a5:0:a/127
+exit
+!
+vlan 1209
+  name DRCHOU52_IPv6_IPV6SUB_VRF_fd00:976a:c307:2859:97c8:77a6:0:a/127
+exit
+!
+! #Allow VLANs towards DRC
+!
+interface Port-channel 651
+ switchport trunk allowed vlan add 109,216,305,411,412,1209
+!
+! #Config towards SB
+!
+interface Eth6/3
+  description 0162.13_VRBHOU01_Eth1/53
+  switchport
+  mtu 9216
+  channel-group 616 mode active
+  shutdown
+!
+interface port-channel616
+  description 100G_BUNDLE_TO_0162.13_VRBHOU02_Po1
+  switchport
+  switchport mode trunk
+  switchport trunk allowed vlan 109,216,305,411,412,1209
+  mtu 9216
+  priority-flow-control mode on
+  spanning-tree port type edge trunk
+  shutdown
+!
+end
+!
+copy run start

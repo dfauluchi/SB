@@ -1,0 +1,15 @@
+
+!
+! VRSHOU02
+!
+show run int lo0
+sh run | sec SB-IPV4-ASSIGNED-SPACE
+sh run | sec SB-IPV4-ASSIGNED-SPACE-ONLY
+sh ip bgp neighbors 10.177.115.232 advertised-routes
+sh ip bgp neighbors 10.177.115.232 advertised-routes | in 10.169.11.20
+
+!
+! DRCHOU22
+!
+sh bgp ipv4 unicast neighbors 10.177.115.233 routes 
+sh bgp ipv4 unicast neighbors 10.177.115.233 routes | in "10.169.11.20|10.169.11.19"

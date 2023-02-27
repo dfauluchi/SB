@@ -1,0 +1,42 @@
+
+!
+! VRSHOU01
+!
+###### LOGS Before HSRP switch #####
+show hsrp brief
+Show run track
+!!!Sample Output!!!
+!!!track 1 interface port-channel1 line-protocol
+!!!track 101 interface port-channel101 line-protocol
+!
+config t
+Interface Lo101
+ no shut
+end
+!
+copy run start
+!
+show hsrp brief 
+!!!*** Verify HSRP is normalized and can see some Active for groups on VRSHOU01 ***!!!
+
+show int po1 | inc rate
+show int po111 | inc rate
+!!!*** Verify active traffic on VRSHOU01 Po1 ***!!!
+
+VRSHOU02:
+config t
+!
+interface Lo101
+ shutdown
+!
+end
+copy run start
+!
+show hsrp brief
+show int po1 | inc rate
+show int po111 | inc rate
+!!!*** Verify no active traffic on VRSHOU02 Po1 ***!!!
+
+VRSHOU01:
+Show hsrp brief 
+!!!*** Verify HSRP is normalized and can see Active for all groups on VRSHOU01 ***!!!
